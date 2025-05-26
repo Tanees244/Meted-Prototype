@@ -1,34 +1,43 @@
 "use client"
 
+import { TeacherLoginForm } from "@/components/login-form"
 import Image from "next/image"
-import { LoginForm } from "@/components/login-form"
 
 export default function TeacherLoginPage() {
   return (
-    <div className="min-h-screen grid grid-cols-1 lg:grid-cols-2">
-      {/* Left side with illustration */}
-      <div className="hidden lg:flex items-center justify-center p-2 rounded-[5px] overflow-hidden">
-        <div className="relative w-full h-full">
-          <Image 
-            src="/teacher-giving-presentation-classroom.jpg"
-            alt="Teacher in classroom"
-            layout="fill"
-            objectFit="cover"
-          />
+    <div className="min-h-screen flex">
+      {/* Left side - Illustration */}
+      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-blue-400 via-blue-300 to-blue-200 relative overflow-hidden">
+        <div className="absolute inset-0 bg-blue-300/30 mix-blend-multiply" />
+        <div className="absolute inset-0 bg-blue-300/20 mix-blend-multiply" />
+        <div className="relative z-10 flex items-center justify-center w-full h-full p-12">
+          <div className="max-w-md text-center">
+            <h1 className="text-4xl font-bold text-white mb-6">
+              Welcome to Meted
+            </h1>
+            <p className="text-white/90 text-lg mb-8">
+              Your comprehensive platform for managing and delivering educational content.
+            </p>
+            <div className="relative w-full h-[400px]">
+              <Image
+                src="/teacher-illustration.svg"
+                alt="Teacher Illustration"
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Right side with content (Teacher Login Form) */}
-      <div className="flex items-center justify-center p-8 lg:p-12 bg-purple-50 relative overflow-hidden">
-        {/* Geometric shapes background */}
-        <div className="absolute -bottom-16 -right-16 w-64 h-64 bg-purple-200 transform rotate-45 opacity-30"></div>
-        <div className="absolute -top-12 -left-12 w-48 h-48 bg-purple-200 transform rotate-45 opacity-20"></div>
-
-        <div className="w-full max-w-sm relative z-10">
-          <LoginForm />
-          <div className="mt-8 text-center text-xs text-gray-500">
-            © 2023 MetEd LMS. All rights reserved.
-          </div>
+      {/* Right side - Login Form */}
+      <div className="w-full lg:w-1/2 bg-gradient-to-br from-blue-400 via-blue-300 to-blue-200 flex items-center justify-center p-8">
+        <div className="w-full max-w-md">
+          <TeacherLoginForm />
+          <p className="mt-8 text-center text-blue-900/60 text-sm">
+            © 2024 Meted. All rights reserved.
+          </p>
         </div>
       </div>
     </div>

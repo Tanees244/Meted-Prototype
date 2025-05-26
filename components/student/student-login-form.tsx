@@ -45,10 +45,10 @@ export function StudentLoginForm() {
   }
 
   return (
-    <Card className="p-6 shadow-lg border-none bg-white/70 backdrop-blur-sm">
+    <Card className="p-6 shadow-lg border-none bg-white/90 backdrop-blur-sm">
       <div className="mb-6 text-center">
-        <h1 className="text-2xl font-bold text-purple-700 mb-2">Student Login</h1>
-        <p className="text-muted-foreground text-sm">Enter your details to log in</p>
+        <h1 className="text-2xl font-bold text-blue-600 mb-2">Student Login</h1>
+        <p className="text-blue-500/70 text-sm">Enter your details to log in</p>
       </div>
       <form onSubmit={handleSubmit}>
         <div className="space-y-4">
@@ -58,16 +58,16 @@ export function StudentLoginForm() {
             </Alert>
           )}
           <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email" className="text-blue-600">Email</Label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500">
+              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-blue-500/70">
                 <MailIcon className="h-5 w-5" />
               </div>
               <Input
                 id="email"
                 type="email"
                 placeholder="student@meted.edu"
-                className="pl-10"
+                className="pl-10 border-blue-200 focus:border-blue-400 focus:ring-blue-400"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -75,29 +75,33 @@ export function StudentLoginForm() {
             </div>
           </div>
           <div className="space-y-2">
-            <Label htmlFor="password">Password</Label>
+            <Label htmlFor="password" className="text-blue-600">Password</Label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500">
+              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-blue-500/70">
                 <LockIcon className="h-5 w-5" />
               </div>
               <Input
                 id="password"
                 type="password"
-                className="pl-10"
+                className="pl-10 border-blue-200 focus:border-blue-400 focus:ring-blue-400"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
             </div>
           </div>
-          <Button type="submit" className="w-full bg-purple-600 hover:bg-purple-700 text-white" disabled={loading}>
+          <Button 
+            type="submit" 
+            className="w-full bg-blue-500 hover:bg-blue-600 text-white transition-colors"
+            disabled={loading}
+          >
             {loading ? "Logging in..." : "Login"}
           </Button>
         </div>
       </form>
       <div className="mt-6 text-center text-sm">
         Don't have an account?{" "}
-        <Link href="/register" className="text-purple-600 hover:text-purple-700 font-medium">
+        <Link href="/register" className="text-blue-600 hover:text-blue-700 font-medium">
           Register Now
         </Link>
       </div>
