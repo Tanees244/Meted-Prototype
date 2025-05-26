@@ -6,7 +6,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { Sheet, SheetContent, SheetTrigger, SheetPortal } from "@/components/ui/sheet"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { LayoutDashboard, Video, BookOpen, FileText, BarChart2, Calendar, LogOut, Menu } from "lucide-react"
 
@@ -57,13 +57,56 @@ export default function StudentLayout({ children }: StudentLayoutProps) {
     },
   ]
 
+  const MobileNav = () => (
+    <div className="flex flex-col flex-grow bg-gradient-to-b from-blue-900 to-blue-500 h-full">
+      <div className="flex items-center justify-between h-16 flex-shrink-0 px-6 border-b border-blue-800">
+        <Link href="/student/dashboard" className="text-2xl font-bold text-white">
+          MetEd Student
+        </Link>
+      </div>
+      <div className="flex flex-col flex-1 px-4 py-5">
+        <nav className="flex-1 space-y-2">
+          {navigation.map((item) => (
+            <Link
+              key={item.name}
+              href={item.href}
+              className={`group flex items-center px-4 py-2 text-sm font-medium rounded-md ${
+                item.current ? "bg-white/20 text-white" : "text-white/70 hover:bg-white/10"
+              }`}
+            >
+              <item.icon
+                className={`mr-3 h-5 w-5 ${
+                  item.current ? "text-white" : "text-white/70 group-hover:text-white"
+                }`}
+                aria-hidden="true"
+              />
+              {item.name}
+            </Link>
+          ))}
+        </nav>
+        <div className="mt-auto pb-4">
+          <Link
+            href="/student"
+            className="group flex items-center px-4 py-2 text-sm font-medium rounded-md text-white/70 hover:bg-white/10"
+          >
+            <LogOut
+              className="mr-3 h-5 w-5 text-white/70 group-hover:text-white"
+              aria-hidden="true"
+            />
+            Logout
+          </Link>
+        </div>
+      </div>
+    </div>
+  )
+
   return (
     <div className="flex h-screen bg-background">
       {/* Sidebar for desktop */}
       <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
-        <div className="flex flex-col flex-grow border-r border-border bg-purple-200 px-4 py-5">
+        <div className="flex flex-col flex-grow border-r border-border bg-gradient-to-b from-blue-900 to-blue-500 px-4 py-5">
           <div className="flex items-center justify-between h-16 flex-shrink-0 px-4">
-            <Link href="/student/dashboard" className="text-2xl font-bold">
+            <Link href="/student/dashboard" className="text-2xl font-bold text-white">
               MetEd Student
             </Link>
           </div>
@@ -74,12 +117,12 @@ export default function StudentLayout({ children }: StudentLayoutProps) {
                   key={item.name}
                   href={item.href}
                   className={`group flex items-center px-4 py-2 text-sm font-medium rounded-md ${
-                    item.current ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-muted"
+                    item.current ? "bg-white/20 text-white" : "text-white/70 hover:bg-white/10"
                   }`}
                 >
                   <item.icon
                     className={`mr-3 h-5 w-5 ${
-                      item.current ? "text-primary-foreground" : "text-muted-foreground group-hover:text-foreground"
+                      item.current ? "text-white" : "text-white/70 group-hover:text-white"
                     }`}
                     aria-hidden="true"
                   />
@@ -90,9 +133,9 @@ export default function StudentLayout({ children }: StudentLayoutProps) {
             <div className="mt-auto pb-4">
               <Link
                 href="/student"
-                className="group flex items-center px-4 py-2 text-sm font-medium rounded-md text-muted-foreground hover:bg-muted"
+                className="group flex items-center px-4 py-2 text-sm font-medium rounded-md text-white/70 hover:bg-white/10"
               >
-                <LogOut className="mr-3 h-5 w-5 text-muted-foreground group-hover:text-foreground" aria-hidden="true" />
+                <LogOut className="mr-3 h-5 w-5 text-white/70 group-hover:text-white" aria-hidden="true" />
                 Logout
               </Link>
             </div>
@@ -100,68 +143,25 @@ export default function StudentLayout({ children }: StudentLayoutProps) {
         </div>
       </div>
 
-      {/* Mobile menu */}
-      <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
-        <SheetContent side="left" className="w-64 p-0">
-          <div className="flex flex-col flex-grow bg-purple-600 h-full">
-            <div className="flex items-center justify-between h-16 flex-shrink-0 px-6 border-b">
-              <Link href="/student/dashboard" className="text-2xl font-bold" onClick={() => setIsMobileMenuOpen(false)}>
-                MetEd Student
-              </Link>
-            </div>
-            <div className="flex flex-col flex-1 px-4 py-5">
-              <nav className="flex-1 space-y-2">
-                {navigation.map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    className={`group flex items-center px-4 py-2 text-sm font-medium rounded-md ${
-                      item.current ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-muted"
-                    }`}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    <item.icon
-                      className={`mr-3 h-5 w-5 ${
-                        item.current ? "text-primary-foreground" : "text-muted-foreground group-hover:text-foreground"
-                      }`}
-                      aria-hidden="true"
-                    />
-                    {item.name}
-                  </Link>
-                ))}
-              </nav>
-              <div className="mt-auto pb-4">
-                <Link
-                  href="/student"
-                  className="group flex items-center px-4 py-2 text-sm font-medium rounded-md text-muted-foreground hover:bg-muted"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  <LogOut
-                    className="mr-3 h-5 w-5 text-muted-foreground group-hover:text-foreground"
-                    aria-hidden="true"
-                  />
-                  Logout
-                </Link>
-              </div>
-            </div>
-          </div>
-        </SheetContent>
-      </Sheet>
-
       {/* Main content */}
       <div className="md:pl-64 flex flex-col flex-1">
         <div className="sticky top-0 z-10 flex items-center justify-between h-16 bg-background border-b border-border px-4 md:px-6">
           <div className="flex items-center md:hidden">
             <Sheet>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" onClick={() => setIsMobileMenuOpen(true)}>
+                <Button variant="ghost" size="icon">
                   <Menu className="h-6 w-6" />
                   <span className="sr-only">Open sidebar</span>
                 </Button>
               </SheetTrigger>
+              <SheetPortal>
+                <SheetContent side="left" className="w-64 p-0">
+                  <MobileNav />
+                </SheetContent>
+              </SheetPortal>
             </Sheet>
           </div>
-          <div className="flex items-center ml-auto">
+          <div className="flex items-center gap-4 ml-auto">
             <ThemeToggle />
           </div>
         </div>
