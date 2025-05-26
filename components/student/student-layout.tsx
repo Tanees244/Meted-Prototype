@@ -64,8 +64,8 @@ export default function StudentLayout({ children }: StudentLayoutProps) {
   ]
 
   const MobileNav = () => (
-    <div className="flex flex-col flex-grow bg-gradient-to-b from-blue-900 via-blue-800 to-blue-700 dark:from-blue-950 dark:via-blue-900 dark:to-blue-800 h-full">
-      <div className="flex items-center justify-between h-16 flex-shrink-0 px-6 border-b border-blue-800/30 dark:border-blue-700/30">
+    <div className="flex flex-col flex-grow bg-gradient-to-b from-[#374457] to-[#4BBC9A] h-full">
+      <div className="flex items-center justify-between h-16 flex-shrink-0 px-6 border-b border-[#4BBC9A]/30">
         <Link href="/student/dashboard" className="text-2xl font-bold text-white">
           MetEd Student
         </Link>
@@ -78,15 +78,15 @@ export default function StudentLayout({ children }: StudentLayoutProps) {
               href={item.href}
               className={`group flex items-center px-4 py-2 text-sm font-medium rounded-md transition-colors ${
                 item.current 
-                  ? "bg-white/20 text-white shadow-sm" 
-                  : "text-white/80 hover:bg-white/10 hover:text-white"
+                  ? "bg-[#FEC74E] text-[#374457] shadow-sm" 
+                  : "text-white/90 hover:bg-[#4BBC9A]/30 hover:text-white"
               }`}
             >
               <item.icon
                 className={`mr-3 h-5 w-5 transition-colors ${
                   item.current 
-                    ? "text-white" 
-                    : "text-white/80 group-hover:text-white"
+                    ? "text-[#374457]" 
+                    : "text-white/90 group-hover:text-white"
                 }`}
                 aria-hidden="true"
               />
@@ -97,10 +97,10 @@ export default function StudentLayout({ children }: StudentLayoutProps) {
         <div className="mt-auto pb-4">
           <Link
             href="/student"
-            className="group flex items-center px-4 py-2 text-sm font-medium rounded-md text-white/80 hover:bg-white/10 hover:text-white transition-colors"
+            className="group flex items-center px-4 py-2 text-sm font-medium rounded-md text-white/90 hover:bg-[#4BBC9A]/30 hover:text-white transition-colors"
           >
             <LogOut
-              className="mr-3 h-5 w-5 text-white/80 group-hover:text-white transition-colors"
+              className="mr-3 h-5 w-5 text-white/90 group-hover:text-white transition-colors"
               aria-hidden="true"
             />
             Logout
@@ -116,10 +116,10 @@ export default function StudentLayout({ children }: StudentLayoutProps) {
   }
 
   return (
-    <div className="flex h-screen bg-gradient-to-br from-blue-200 via-blue-100 to-blue-50">
+    <div className="flex h-screen bg-gradient-to-br from-[#374457]/10 via-[#4BBC9A]/10 to-white">
       {/* Sidebar for desktop */}
       <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
-        <div className="flex flex-col flex-grow border-r border-border bg-gradient-to-b from-blue-900 via-blue-800 to-blue-700 dark:from-blue-950 dark:via-blue-900 dark:to-blue-800 px-4 py-5">
+        <div className="flex flex-col flex-grow border-r border-[#4BBC9A]/30 bg-gradient-to-b from-[#374457] to-[#4BBC9A] px-4 py-5">
           <div className="flex items-center justify-between h-16 flex-shrink-0 px-4">
             <Link href="/student/dashboard" className="text-2xl font-bold text-white">
               MetEd Student
@@ -133,15 +133,15 @@ export default function StudentLayout({ children }: StudentLayoutProps) {
                   href={item.href}
                   className={`group flex items-center px-4 py-2 text-sm font-medium rounded-md transition-colors ${
                     item.current 
-                      ? "bg-white/20 text-white shadow-sm" 
-                      : "text-white/80 hover:bg-white/10 hover:text-white"
+                      ? "bg-[#FEC74E] text-[#374457] shadow-sm" 
+                      : "text-white/90 hover:bg-[#4BBC9A]/30 hover:text-white"
                   }`}
                 >
                   <item.icon
                     className={`mr-3 h-5 w-5 transition-colors ${
                       item.current 
-                        ? "text-white" 
-                        : "text-white/80 group-hover:text-white"
+                        ? "text-[#374457]" 
+                        : "text-white/90 group-hover:text-white"
                     }`}
                     aria-hidden="true"
                   />
@@ -152,10 +152,10 @@ export default function StudentLayout({ children }: StudentLayoutProps) {
             <div className="mt-auto">
               <Link
                 href="/student"
-                className="group flex items-center px-4 py-2 text-sm font-medium rounded-md text-white/80 hover:bg-white/10 hover:text-white transition-colors"
+                className="group flex items-center px-4 py-2 text-sm font-medium rounded-md text-white/90 hover:bg-[#4BBC9A]/30 hover:text-white transition-colors"
               >
                 <LogOut
-                  className="mr-3 h-5 w-5 text-white/80 group-hover:text-white transition-colors"
+                  className="mr-3 h-5 w-5 text-white/90 group-hover:text-white transition-colors"
                   aria-hidden="true"
                 />
                 Logout
@@ -169,7 +169,7 @@ export default function StudentLayout({ children }: StudentLayoutProps) {
       <div className="md:hidden">
         <Sheet>
           <SheetTrigger asChild>
-            <Button variant="ghost" size="icon" className="fixed top-4 left-4 z-50">
+            <Button variant="ghost" size="icon" className="fixed top-4 left-4 z-50 text-[#374457] hover:text-[#4BBC9A]">
               <Menu className="h-6 w-6" />
             </Button>
           </SheetTrigger>
@@ -181,7 +181,7 @@ export default function StudentLayout({ children }: StudentLayoutProps) {
 
       {/* Main content */}
       <div className="flex-1 md:pl-64">
-        <div className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-border bg-white/80 backdrop-blur-sm px-4 shadow-sm dark:bg-gray-900/80">
+        <div className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-[#4BBC9A]/20 bg-white/90 backdrop-blur-sm px-4 shadow-sm">
           <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
             <div className="flex flex-1"></div>
             <div className="flex items-center gap-x-4 lg:gap-x-6">
