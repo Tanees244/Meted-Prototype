@@ -6,6 +6,13 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Search, FileText, Video, Download, Book, FileImage } from "lucide-react"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
 
 // Mock data for resources
 const resources = [
@@ -54,6 +61,8 @@ const resources = [
 export default function StudentResourcesContent() {
   const [searchQuery, setSearchQuery] = useState("")
   const [activeSubject, setActiveSubject] = useState("all")
+  const [selectedResource, setSelectedResource] = useState<typeof resources[0] | null>(null)
+  const [showResourceDialog, setShowResourceDialog] = useState(false)
 
   const filteredResources = resources.filter((resource) => {
     const matchesSearch =
@@ -65,8 +74,13 @@ export default function StudentResourcesContent() {
 
   const subjects = ["all", ...new Set(resources.map((resource) => resource.subject.toLowerCase()))]
 
-  const getIconForType = (type, Icon) => {
+  const getIconForType = (type: string, Icon: React.ElementType) => {
     return <Icon className="h-5 w-5" />
+  }
+
+  const handleViewMore = (resource: typeof resources[0]) => {
+    setSelectedResource(resource)
+    setShowResourceDialog(true)
   }
 
   return (
@@ -96,7 +110,7 @@ export default function StudentResourcesContent() {
         </TabsList>
       </Tabs>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {filteredResources.length === 0 ? (
           <div className="col-span-full text-center py-8">
             <p className="text-muted-foreground">No resources found matching your criteria</p>
@@ -122,8 +136,12 @@ export default function StudentResourcesContent() {
                   <span>{resource.size}</span>
                 </div>
               </CardContent>
-              <CardFooter>
-                <Button variant="outline" className="w-full" onClick={() => {}}>
+              <CardFooter className="flex justify-between">
+                <Button variant="outline" size="sm" onClick={() => handleViewMore(resource)}>
+                  <FileText className="h-4 w-4 mr-2" />
+                  View More
+                </Button>
+                <Button variant="outline" size="sm" onClick={() => { /* Add download logic */ }}>
                   <Download className="mr-2 h-4 w-4" />
                   Download
                 </Button>
@@ -132,6 +150,49 @@ export default function StudentResourcesContent() {
           ))
         )}
       </div>
+
+      <Dialog open={showResourceDialog} onOpenChange={setShowResourceDialog}>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              {selectedResource && getIconForType(selectedResource.type, selectedResource.icon)}
+              {selectedResource?.title}
+            </DialogTitle>
+            <DialogDescription>{selectedResource?.subject}</DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <div>
+              <h4 className="text-sm font-medium mb-2">Description</h4>
+              <p className="text-sm text-muted-foreground">{selectedResource?.description}</p>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <h4 className="text-sm font-medium mb-1">Type</h4>
+                <p className="text-sm text-muted-foreground capitalize">{selectedResource?.type}</p>
+              </div>
+              <div>
+                <h4 className="text-sm font-medium mb-1">Size</h4>
+                <p className="text-sm text-muted-foreground">{selectedResource?.size}</p>
+              </div>
+              <div>
+                <h4 className="text-sm font-medium mb-1">Upload Date</h4>
+                <p className="text-sm text-muted-foreground">
+                  {selectedResource && new Date(selectedResource.uploadedDate).toLocaleDateString()}
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="flex justify-end gap-2">
+            <Button variant="outline" onClick={() => setShowResourceDialog(false)}>
+              Close
+            </Button>
+            <Button>
+              <Download className="mr-2 h-4 w-4" />
+              Download
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }
