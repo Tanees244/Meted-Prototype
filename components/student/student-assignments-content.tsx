@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
 import {
@@ -17,8 +17,7 @@ import {
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Input } from "@/components/ui/input"
-import { UploadIcon as FileUpload } from "lucide-react"
-import { ClockIcon } from "lucide-react"
+import { UploadIcon as FileUpload, ClockIcon } from "lucide-react"
 
 interface Assignment {
   id: number
@@ -38,7 +37,7 @@ const pendingAssignments: Assignment[] = [
     id: 1,
     title: "Mathematics Problem Set",
     subject: "Mathematics",
-    dueDate: "2023-06-15",
+    dueDate: "2024-07-15",
     description: "Complete problems 1-20 in Chapter 5",
     status: "pending",
   },
@@ -46,7 +45,7 @@ const pendingAssignments: Assignment[] = [
     id: 2,
     title: "English Essay",
     subject: "English",
-    dueDate: "2023-06-18",
+    dueDate: "2024-07-18",
     description: "Write a 500-word essay on the theme of identity in the assigned novel",
     status: "pending",
   },
@@ -57,8 +56,8 @@ const completedAssignments: Assignment[] = [
     id: 3,
     title: "Science Lab Report",
     subject: "Science",
-    dueDate: "2023-06-10",
-    submittedDate: "2023-06-09",
+    dueDate: "2024-07-10",
+    submittedDate: "2024-07-09",
     grade: "A",
     feedback: "Excellent work! Your analysis was thorough and well-presented.",
     status: "completed",
@@ -67,15 +66,15 @@ const completedAssignments: Assignment[] = [
     id: 4,
     title: "History Research Paper",
     subject: "History",
-    dueDate: "2023-06-05",
-    submittedDate: "2023-06-04",
+    dueDate: "2024-07-05",
+    submittedDate: "2024-07-04",
     grade: "B+",
     feedback: "Good research and arguments. Work on improving your citations.",
     status: "completed",
   },
 ]
 
-export function StudentAssignmentsContent() {
+export default function StudentAssignmentsContent() {
   const [selectedAssignment, setSelectedAssignment] = useState<Assignment | null>(null)
   const [submissionText, setSubmissionText] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -153,16 +152,70 @@ export function StudentAssignmentsContent() {
                     >
                       {assignment.status}
                     </Badge>
-                    <Button
-                      variant="outline"
-                      className={
-                        assignment.status === "completed"
-                          ? "border-[#a6c732] text-[#a6c732] hover:bg-[#a6c732]/10"
-                          : "border-[#ff7f00] text-[#ff7f00] hover:bg-[#ff7f00]/10"
-                      }
-                    >
-                      {assignment.status === "completed" ? "View Submission" : "Submit Work"}
-                    </Button>
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <Button
+                          variant="outline"
+                          className="border-[#ff7f00] text-[#ff7f00] hover:bg-[#ff7f00]/10"
+                        >
+                          Submit Work
+                        </Button>
+                      </DialogTrigger>
+                      <DialogContent>
+                        <DialogHeader>
+                          <DialogTitle>Submit Assignment</DialogTitle>
+                          <DialogDescription>
+                            Upload your work for {assignment.title}
+                          </DialogDescription>
+                        </DialogHeader>
+                        <div className="grid gap-4 py-4">
+                          <div className="grid gap-2">
+                            <Label htmlFor="submission">Your Submission</Label>
+                            <Textarea
+                              id="submission"
+                              placeholder="Type your submission here..."
+                              value={submissionText}
+                              onChange={(e) => setSubmissionText(e.target.value)}
+                              className="min-h-[200px]"
+                            />
+                          </div>
+                          <div className="grid gap-2">
+                            <Label htmlFor="file">Upload File (Optional)</Label>
+                            <div className="flex items-center justify-center w-full">
+                              <label
+                                htmlFor="file-upload"
+                                className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100"
+                              >
+                                <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                                  <FileUpload className="w-8 h-8 mb-4 text-gray-500" />
+                                  <p className="mb-2 text-sm text-gray-500">
+                                    <span className="font-semibold">Click to upload</span> or drag and drop
+                                  </p>
+                                  <p className="text-xs text-gray-500">PDF, DOC, or DOCX</p>
+                                </div>
+                                <input id="file-upload" type="file" className="hidden" />
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                        <DialogFooter>
+                          <Button
+                            variant="outline"
+                            onClick={() => setOpenDialog(false)}
+                            disabled={isSubmitting}
+                          >
+                            Cancel
+                          </Button>
+                          <Button
+                            onClick={handleSubmit}
+                            disabled={!submissionText || isSubmitting}
+                            className="bg-[#ff7f00] hover:bg-[#ff7f00]/90"
+                          >
+                            {isSubmitting ? "Submitting..." : "Submit"}
+                          </Button>
+                        </DialogFooter>
+                      </DialogContent>
+                    </Dialog>
                   </div>
                 </CardContent>
               </Card>
@@ -189,26 +242,27 @@ export function StudentAssignmentsContent() {
                 <CardContent>
                   <div className="flex justify-between text-sm text-[#191970]/70 mb-4">
                     <span>Submitted: {assignment.submittedDate ? new Date(assignment.submittedDate).toLocaleDateString() : 'Not submitted'}</span>
+                    {assignment.grade && (
+                      <span className="font-medium">Grade: {assignment.grade}</span>
+                    )}
                   </div>
+                  {assignment.feedback && (
+                    <div className="mb-4 p-3 bg-[#a6c732]/10 rounded-lg">
+                      <p className="text-sm text-[#191970]">{assignment.feedback}</p>
+                    </div>
+                  )}
                   <div className="flex items-center justify-between">
                     <Badge
-                      className={
-                        assignment.status === "completed"
-                          ? "bg-[#a6c732]/20 text-[#a6c732]"
-                          : "bg-[#ff7f00]/20 text-[#ff7f00]"
-                      }
+                      className="bg-[#a6c732]/20 text-[#a6c732]"
                     >
                       {assignment.status}
                     </Badge>
                     <Button
                       variant="outline"
-                      className={
-                        assignment.status === "completed"
-                          ? "border-[#a6c732] text-[#a6c732] hover:bg-[#a6c732]/10"
-                          : "border-[#ff7f00] text-[#ff7f00] hover:bg-[#ff7f00]/10"
-                      }
+                      className="border-[#a6c732] text-[#a6c732] hover:bg-[#a6c732]/10"
+                      onClick={() => setViewFeedback(assignment)}
                     >
-                      {assignment.status === "completed" ? "View Submission" : "Submit Work"}
+                      View Feedback
                     </Button>
                   </div>
                 </CardContent>
@@ -217,6 +271,27 @@ export function StudentAssignmentsContent() {
           )}
         </TabsContent>
       </Tabs>
+
+      <Dialog open={!!viewFeedback} onOpenChange={() => setViewFeedback(null)}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Assignment Feedback</DialogTitle>
+            <DialogDescription>
+              Feedback for {viewFeedback?.title}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div>
+              <h4 className="font-medium text-[#191970]">Grade</h4>
+              <p className="text-[#019583]">{viewFeedback?.grade}</p>
+            </div>
+            <div>
+              <h4 className="font-medium text-[#191970]">Feedback</h4>
+              <p className="text-[#191970]/80">{viewFeedback?.feedback}</p>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }
