@@ -7,9 +7,9 @@ export default function AdminLoginPage() {
   return (
     <div className="min-h-screen flex">
       {/* Left side - Illustration */}
-      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-blue-400 via-blue-300 to-blue-200 relative overflow-hidden">
-        <div className="absolute inset-0 bg-blue-300/30 mix-blend-multiply" />
-        <div className="absolute inset-0 bg-blue-300/20 mix-blend-multiply" />
+      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-teal-600 via-teal-500 to-teal-400 relative overflow-hidden">
+        <div className="absolute inset-0 bg-teal-400/30 mix-blend-multiply" />
+        <div className="absolute inset-0 bg-yellow-300/20 mix-blend-multiply" />
         <div className="relative z-10 flex items-center justify-center w-full h-full p-12">
           <div className="max-w-md text-center">
             <h1 className="text-4xl font-bold text-white mb-6">
@@ -32,10 +32,10 @@ export default function AdminLoginPage() {
       </div>
 
       {/* Right side - Login Form */}
-      <div className="w-full lg:w-1/2 bg-gradient-to-br from-blue-400 via-blue-300 to-blue-200 flex items-center justify-center p-8">
+      <div className="w-full lg:w-1/2 bg-gradient-to-br from-teal-600 via-teal-500 to-teal-400 flex items-center justify-center p-8">
         <div className="w-full max-w-md">
           <AdminLoginForm />
-          <p className="mt-8 text-center text-blue-900/60 text-sm">
+          <p className="mt-8 text-center text-white/60 text-sm">
             © 2024 Meted. All rights reserved.
           </p>
         </div>
