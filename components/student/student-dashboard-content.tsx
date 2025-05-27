@@ -51,11 +51,20 @@ const upcomingSessions = [
     duration: "45 minutes",
     date: new Date(),
   },
+  
   {
-    id: 2,
-    teacher: "Ms. Smith",
-    subject: "Science",
+    id: 3,
+    teacher: "Mrs. Brown",
+    subject: "English",
     time: "Tomorrow, 10:00 AM",
+    duration: "45 minutes",
+    date: new Date(new Date().setDate(new Date().getDate() + 1)),
+  },
+  {
+    id: 4,
+    teacher: "Mr. Wilson",
+    subject: "History",
+    time: "Tomorrow, 2:00 PM",
     duration: "45 minutes",
     date: new Date(new Date().setDate(new Date().getDate() + 1)),
   },
@@ -150,7 +159,7 @@ export function StudentDashboardContent() {
                 <p className="text-[#019583]">Keep it up and improve your progress.</p>
               </div>
               {/* User Avatar */}
-              <img src="/Humaaans Space.svg" alt="User avatar" className="h-full w-auto object-contain" />
+              <img src="/Humaaans Space.svg" alt="User avatar" className="h-[200px] w-auto object-cover" />
             </div>
           </Card>
 
@@ -213,39 +222,34 @@ export function StudentDashboardContent() {
             </CardContent>
           </Card>
 
-          {/* Original Upcoming Sessions Card */}
+          {/* Featured Resources Card */}
           <Card className="bg-white/90 backdrop-blur-sm border-[#ff7f00]/20 shadow-lg">
             <CardHeader>
-              <CardTitle className="text-[#191970]">Upcoming Sessions</CardTitle>
-              <CardDescription className="text-[#019583]">Your next learning sessions</CardDescription>
+              <CardTitle className="text-[#191970]">Featured Resources</CardTitle>
+              <CardDescription className="text-[#019583]">Helpful materials for your studies</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {upcomingSessions.map((session) => (
-                  <div key={session.id} className="flex items-center justify-between p-4 bg-white/50 rounded-lg border border-[#ff7f00]/20">
-                    <div>
-                      <h4 className="font-medium text-[#191970]">{session.subject}</h4>
-                      <p className="text-sm text-[#019583]">with {session.teacher}</p>
-                      <div className="flex items-center text-sm text-[#ff7f00] mt-1">
-                        <CalendarIcon className="h-4 w-4 mr-1" />
-                        <span>{session.time}</span>
-                        <span className="mx-2">•</span>
-                        <ClockIcon className="h-4 w-4 mr-1" />
-                        <span>{session.duration}</span>
-                      </div>
+                {featuredResources.map(resource => (
+                  <div key={resource.id} className="flex items-center space-x-3 p-3 bg-white/50 rounded-lg border border-[#ff7f00]/20">
+                    {resource.type === 'document' && <FileTextIcon className="h-5 w-5 text-[#ff7f00]" />}
+                    {resource.type === 'video' && <VideoIcon className="h-5 w-5 text-[#ff7f00]" />}
+                    <div className="flex-1">
+                      <h4 className="font-medium text-[#191970]">{resource.title}</h4>
+                      <p className="text-sm text-[#019583]">{resource.description}</p>
                     </div>
-                    <Button
-                      onClick={() => joinSession(session.id)}
-                      className="bg-[#ff7f00] hover:bg-[#ff7f00]/90 text-white"
-                    >
-                      Join
-                    </Button>
                   </div>
                 ))}
               </div>
+              <Button
+                variant="outline"
+                className="mt-4 w-full border-[#ff7f00] text-[#ff7f00] hover:bg-[#ff7f00]/10"
+                onClick={() => router.push('/student/resources')}
+              >
+                See More Resources
+              </Button>
             </CardContent>
           </Card>
-
         </div>
 
         {/* Right Column */}
@@ -322,7 +326,7 @@ export function StudentDashboardContent() {
                 <div className="mt-3 space-y-2">
                   <h3 className="text-[#191970] font-semibold text-sm">Sessions on {selectedDate && format(selectedDate, 'PPP')}</h3>
                   {sessionsForSelectedDate.map(session => (
-                    <div key={session.id} className="text-sm text-[#191970]/80 p-2 rounded-lg bg-[#fff5e6] border border-[#ff7f00]/20">
+                    <div key={session.id} className="text-sm text-[#191970]/80 p-3 rounded-lg bg-[#fff5e6] border border-[#ff7f00]/20">
                       <div className="flex items-center justify-between">
                         <span className="font-medium">{session.subject}</span>
                         <span className="text-[#ff7f00]">{session.time}</span>
@@ -330,6 +334,18 @@ export function StudentDashboardContent() {
                       <div className="flex items-center mt-1">
                         <User className="h-3 w-3 mr-1 text-[#019583]" />
                         <span className="text-[#019583]">with {session.teacher}</span>
+                      </div>
+                      <div className="flex items-center justify-between mt-2">
+                        <div className="flex items-center text-xs text-[#ff7f00]">
+                          <ClockIcon className="h-3 w-3 mr-1" />
+                          <span>{session.duration}</span>
+                        </div>
+                        <Button
+                          onClick={() => router.push('/student/live-sessions')}
+                          className="bg-[#ff7f00] hover:bg-[#ff7f00]/90 text-white text-xs px-3 py-1 h-7"
+                        >
+                          Join Now
+                        </Button>
                       </div>
                     </div>
                   ))}
@@ -342,29 +358,26 @@ export function StudentDashboardContent() {
             </CardContent>
           </Card>
 
-          {/* Featured Resources Card */}
+          {/* Announcements Card */}
           <Card className="bg-white/90 backdrop-blur-sm border-[#ff7f00]/20 shadow-lg">
             <CardHeader>
-              <CardTitle className="text-[#191970]">Featured Resources</CardTitle>
-              <CardDescription className="text-[#019583]">Helpful materials for your studies</CardDescription>
+              <CardTitle className="text-[#191970]">Announcements</CardTitle>
+              <CardDescription className="text-[#019583]">Latest updates and news</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {featuredResources.slice(0, 2).map(resource => (
-                  <div key={resource.id} className="flex items-center space-x-3">
-                    {resource.type === 'document' && <FileTextIcon className="h-5 w-5 text-[#ff7f00]" />}
-                    {resource.type === 'video' && <VideoIcon className="h-5 w-5 text-[#ff7f00]" />}
-                    <span className="text-[#191970]">{resource.title}</span>
+                {announcements.map((announcement) => (
+                  <div key={announcement.id} className="p-3 bg-white/50 rounded-lg border border-[#ff7f00]/20">
+                    <div className="flex items-start justify-between">
+                      <div>
+                        <h4 className="font-medium text-[#191970]">{announcement.title}</h4>
+                        <p className="text-sm text-[#191970]/80 mt-1">{announcement.description}</p>
+                      </div>
+                      <span className="text-xs text-[#019583]">{announcement.date}</span>
+                    </div>
                   </div>
                 ))}
               </div>
-              <Button
-                variant="outline"
-                className="mt-4 w-full border-[#ff7f00] text-[#ff7f00] hover:bg-[#ff7f00]/10"
-                onClick={() => router.push('/student/resources')}
-              >
-                See More Resources
-              </Button>
             </CardContent>
           </Card>
         </div>

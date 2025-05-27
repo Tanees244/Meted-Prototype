@@ -82,7 +82,7 @@ export default function StudentLayout({ children }: { children: React.ReactNode 
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >
-        <div className="flex h-16 items-center justify-between px-6 border-b border-[#ff7f00]/20">
+        <div className="flex h-8 items-center justify-between px-6 pt-12 pb-8">
           <h1 className="text-2xl font-bold">MetEd Student</h1>
         </div>
         <nav className="space-y-1 p-6">
@@ -105,8 +105,8 @@ export default function StudentLayout({ children }: { children: React.ReactNode 
             )
           })}
         </nav>
-        <div className="absolute bottom-0 w-full border-t border-[#ff7f00]/20 p-6">
-          <div className="space-y-4">
+        <div className="absolute bottom-0 w-full py-0">
+          <div className="space-y-2">
             {/* Notification and Settings Section */}
             <div className="flex flex-col gap-2">
               {/* <Button
@@ -146,7 +146,7 @@ export default function StudentLayout({ children }: { children: React.ReactNode 
             {/* Logout Button */}
             <Button
               variant="ghost"
-              className="w-full justify-start space-x-3 text-white/70 hover:bg-[#ff7f00]/10 hover:text-white rounded-lg px-4 py-3"
+              className="w-full justify-start space-x-3 text-white/70 hover:bg-[#ff7f00]/10 hover:text-white rounded-lg px-10 py-12"
             >
               <LogOut className="h-5 w-5" />
               <span className="text-sm font-medium">Logout</span>
