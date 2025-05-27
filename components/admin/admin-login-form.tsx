@@ -1,103 +1,103 @@
 "use client"
 
-import type React from "react"
-
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Card } from "@/components/ui/card"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { LockIcon, MailIcon } from "lucide-react"
+import { Icons } from "@/components/icons"
 
 export function AdminLoginForm() {
   const router = useRouter()
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
-  const [loading, setLoading] = useState(false)
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
+  async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    setIsLoading(true)
     setError("")
 
-    // Simulate API call
+    const formData = new FormData(event.currentTarget)
+    const email = formData.get("email") as string
+    const password = formData.get("password") as string
+
     try {
-      // In a real app, this would be an API call to authenticate
-      await new Promise((resolve) => setTimeout(resolve, 1000))
-
-      // Check if this is first login (simulated)
-      const isFirstLogin = email.includes("new")
-
-      if (isFirstLogin) {
-        router.push("/admin/change-password")
-      } else {
-        router.push("/admin/dashboard")
-      }
-    } catch (err) {
-      setError("Invalid email or password. Please try again.")
+      // TODO: Implement admin login logic
+      console.log("Admin login:", { email, password })
+      router.push("/admin/dashboard")
+    } catch (error) {
+      setError("Invalid email or password")
     } finally {
-      setLoading(false)
+      setIsLoading(false)
     }
   }
 
   return (
-    <Card className="p-6 shadow-lg border-none bg-white/90 backdrop-blur-sm">
-      <div className="mb-6 text-center">
-        <h1 className="text-2xl font-bold text-blue-600 mb-2">Admin Login</h1>
-        <p className="text-blue-500/70 text-sm">Enter your details to log in</p>
+    <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+      <div className="flex flex-col space-y-2 text-center">
+        <h1 className="text-2xl font-semibold tracking-tight text-[#4A007C]">
+          Admin Login
+        </h1>
+        <p className="text-sm text-[#6B2A9E]">
+          Enter your credentials to access the admin dashboard
+        </p>
       </div>
-      <form onSubmit={handleSubmit}>
-        <div className="space-y-4">
-          {error && (
-            <Alert variant="destructive">
-              <AlertDescription>{error}</AlertDescription>
-            </Alert>
-          )}
-          <div className="space-y-2">
-            <Label htmlFor="email" className="text-blue-600">Email</Label>
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-blue-500/70">
-                <MailIcon className="h-5 w-5" />
+
+      <div className="grid gap-6">
+        <form onSubmit={onSubmit}>
+          <div className="grid gap-4">
+            <div className="grid gap-2">
+              <Label htmlFor="email" className="text-[#4A007C]">
+                Email
+              </Label>
+              <div className="relative">
+                <Icons.mail className="absolute left-3 top-3 h-4 w-4 text-[#6B2A9E]" />
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="admin@example.com"
+                  required
+                  className="pl-9 border-[#EDE8FE] focus:border-[#4A007C] focus:ring-[#4A007C]"
+                />
               </div>
-              <Input
-                id="email"
-                type="email"
-                placeholder="admin@meted.edu"
-                className="pl-10 border-blue-200 focus:border-blue-400 focus:ring-blue-400"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
             </div>
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="password" className="text-blue-600">Password</Label>
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-blue-500/70">
-                <LockIcon className="h-5 w-5" />
+            <div className="grid gap-2">
+              <Label htmlFor="password" className="text-[#4A007C]">
+                Password
+              </Label>
+              <div className="relative">
+                <Icons.lock className="absolute left-3 top-3 h-4 w-4 text-[#6B2A9E]" />
+                <Input
+                  id="password"
+                  name="password"
+                  type="password"
+                  required
+                  className="pl-9 border-[#EDE8FE] focus:border-[#4A007C] focus:ring-[#4A007C]"
+                />
               </div>
-              <Input
-                id="password"
-                type="password"
-                className="pl-10 border-blue-200 focus:border-blue-400 focus:ring-blue-400"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
             </div>
+            <Button
+              type="submit"
+              className="bg-[#4A007C] hover:bg-[#6B2A9E] text-white"
+              disabled={isLoading}
+            >
+              {isLoading && (
+                <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+              )}
+              Sign In
+            </Button>
           </div>
-          <Button 
-            type="submit" 
-            className="w-full bg-blue-500 hover:bg-blue-600 text-white transition-colors"
-            disabled={loading}
-          >
-            {loading ? "Logging in..." : "Login"}
-          </Button>
-        </div>
-      </form>
-    </Card>
+        </form>
+        {error && (
+          <Alert variant="destructive">
+            <AlertDescription className="text-[#4A007C]">
+              {error}
+            </AlertDescription>
+          </Alert>
+        )}
+      </div>
+    </div>
   )
 }

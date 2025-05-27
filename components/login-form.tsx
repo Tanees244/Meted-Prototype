@@ -45,8 +45,8 @@ export function TeacherLoginForm() {
   return (
     <Card className="p-6 shadow-lg border-none bg-white/90 backdrop-blur-sm">
       <div className="mb-6 text-center">
-        <h1 className="text-2xl font-bold text-blue-600 mb-2">Teacher Login</h1>
-        <p className="text-blue-500/70 text-sm">Enter your details to log in</p>
+        <h1 className="text-2xl font-bold text-[#4A007C] mb-2">Teacher Login</h1>
+        <p className="text-[#6B2A9E]/70 text-sm">Enter your details to log in</p>
       </div>
       <form onSubmit={handleSubmit}>
         <div className="space-y-4">
@@ -56,16 +56,16 @@ export function TeacherLoginForm() {
             </Alert>
           )}
           <div className="space-y-2">
-            <Label htmlFor="email" className="text-blue-600">Email</Label>
+            <Label htmlFor="email" className="text-[#4A007C]">Email</Label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-blue-500/70">
+              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-[#6B2A9E]/70">
                 <MailIcon className="h-5 w-5" />
               </div>
               <Input
                 id="email"
                 type="email"
                 placeholder="teacher@meted.edu"
-                className="pl-10 border-blue-200 focus:border-blue-400 focus:ring-blue-400"
+                className="pl-10 border-[#EDE8FE] focus:border-[#4A007C] focus:ring-[#4A007C]"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -73,15 +73,15 @@ export function TeacherLoginForm() {
             </div>
           </div>
           <div className="space-y-2">
-            <Label htmlFor="password" className="text-blue-600">Password</Label>
+            <Label htmlFor="password" className="text-[#4A007C]">Password</Label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-blue-500/70">
+              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-[#6B2A9E]/70">
                 <LockIcon className="h-5 w-5" />
               </div>
               <Input
                 id="password"
                 type="password"
-                className="pl-10 border-blue-200 focus:border-blue-400 focus:ring-blue-400"
+                className="pl-10 border-[#EDE8FE] focus:border-[#4A007C] focus:ring-[#4A007C]"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -90,7 +90,7 @@ export function TeacherLoginForm() {
           </div>
           <Button 
             type="submit" 
-            className="w-full bg-blue-500 hover:bg-blue-600 text-white transition-colors"
+            className="w-full bg-[#4A007C] hover:bg-[#6B2A9E] text-white transition-colors"
             disabled={loading}
           >
             {loading ? "Logging in..." : "Login"}
