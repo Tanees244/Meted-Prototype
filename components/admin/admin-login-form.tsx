@@ -44,10 +44,10 @@ export function AdminLoginForm() {
   }
 
   return (
-    <Card className="p-6 shadow-lg border-none bg-white/90 backdrop-blur-sm">
+    <Card className="p-6 shadow-lg border-none bg-teal-800/90 backdrop-blur-sm">
       <div className="mb-6 text-center">
-        <h1 className="text-2xl font-bold text-blue-600 mb-2">Admin Login</h1>
-        <p className="text-blue-500/70 text-sm">Enter your details to log in</p>
+        <h1 className="text-2xl font-bold text-yellow-300 mb-2">Admin Login</h1>
+        <p className="text-yellow-200/70 text-sm">Enter your details to log in</p>
       </div>
       <form onSubmit={handleSubmit}>
         <div className="space-y-4">
@@ -57,16 +57,16 @@ export function AdminLoginForm() {
             </Alert>
           )}
           <div className="space-y-2">
-            <Label htmlFor="email" className="text-blue-600">Email</Label>
+            <Label htmlFor="email" className="text-yellow-200">Email</Label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-blue-500/70">
+              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-yellow-300/70">
                 <MailIcon className="h-5 w-5" />
               </div>
               <Input
                 id="email"
                 type="email"
                 placeholder="admin@meted.edu"
-                className="pl-10 border-blue-200 focus:border-blue-400 focus:ring-blue-400"
+                className="pl-10 bg-teal-900/50 border-teal-700 text-white placeholder:text-teal-300/50 focus:border-yellow-400 focus:ring-yellow-400"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -74,15 +74,15 @@ export function AdminLoginForm() {
             </div>
           </div>
           <div className="space-y-2">
-            <Label htmlFor="password" className="text-blue-600">Password</Label>
+            <Label htmlFor="password" className="text-yellow-200">Password</Label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-blue-500/70">
+              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-yellow-300/70">
                 <LockIcon className="h-5 w-5" />
               </div>
               <Input
                 id="password"
                 type="password"
-                className="pl-10 border-blue-200 focus:border-blue-400 focus:ring-blue-400"
+                className="pl-10 bg-teal-900/50 border-teal-700 text-white placeholder:text-teal-300/50 focus:border-yellow-400 focus:ring-yellow-400"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -91,7 +91,7 @@ export function AdminLoginForm() {
           </div>
           <Button 
             type="submit" 
-            className="w-full bg-blue-500 hover:bg-blue-600 text-white transition-colors"
+            className="w-full bg-yellow-500 hover:bg-yellow-600 text-teal-900 font-semibold transition-colors"
             disabled={loading}
           >
             {loading ? "Logging in..." : "Login"}
