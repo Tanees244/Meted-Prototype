@@ -19,8 +19,20 @@ import { Textarea } from "@/components/ui/textarea"
 import { Input } from "@/components/ui/input"
 import { UploadIcon as FileUpload } from "lucide-react"
 
+interface Assignment {
+  id: number
+  title: string
+  subject: string
+  dueDate: string
+  description?: string
+  submittedDate?: string
+  grade?: string
+  feedback?: string
+  status: "pending" | "completed"
+}
+
 // Mock data for assignments
-const pendingAssignments = [
+const pendingAssignments: Assignment[] = [
   {
     id: 1,
     title: "Mathematics Problem Set",
@@ -39,7 +51,7 @@ const pendingAssignments = [
   },
 ]
 
-const completedAssignments = [
+const completedAssignments: Assignment[] = [
   {
     id: 3,
     title: "Science Lab Report",
@@ -63,11 +75,11 @@ const completedAssignments = [
 ]
 
 export default function StudentAssignmentsContent() {
-  const [selectedAssignment, setSelectedAssignment] = useState(null)
+  const [selectedAssignment, setSelectedAssignment] = useState<Assignment | null>(null)
   const [submissionText, setSubmissionText] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [openDialog, setOpenDialog] = useState(false)
-  const [viewFeedback, setViewFeedback] = useState(null)
+  const [viewFeedback, setViewFeedback] = useState<Assignment | null>(null)
 
   const handleSubmit = () => {
     setIsSubmitting(true)
@@ -81,38 +93,53 @@ export default function StudentAssignmentsContent() {
   }
 
   return (
-    <div className="container mx-auto py-6">
-      <h1 className="text-3xl font-bold mb-6">My Assignments</h1>
+    <div className="space-y-6">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
+        <div>
+          <h1 className="text-2xl font-bold tracking-tight text-[#191970]">My Assignments</h1>
+          <p className="text-[#019583]">View and submit your assignments</p>
+        </div>
+      </div>
 
       <Tabs defaultValue="pending" className="w-full">
-        <TabsList className="grid w-full max-w-md grid-cols-2 mb-6">
-          <TabsTrigger value="pending">Pending</TabsTrigger>
-          <TabsTrigger value="completed">Completed</TabsTrigger>
+        <TabsList className="grid w-full max-w-md grid-cols-2 mb-6 bg-white/90 backdrop-blur-sm border-[#ff7f00]/20 shadow-lg">
+          <TabsTrigger 
+            value="pending"
+            className="data-[state=active]:bg-[#ff7f00] data-[state=active]:text-white"
+          >
+            Pending
+          </TabsTrigger>
+          <TabsTrigger 
+            value="completed"
+            className="data-[state=active]:bg-[#a6c732] data-[state=active]:text-white"
+          >
+            Completed
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="pending" className="space-y-4">
           {pendingAssignments.length === 0 ? (
-            <Card>
+            <Card className="bg-white/90 backdrop-blur-sm border-[#ff7f00]/20 shadow-lg">
               <CardContent className="pt-6">
-                <p className="text-center text-muted-foreground">No pending assignments</p>
+                <p className="text-center text-[#191970]/70">No pending assignments</p>
               </CardContent>
             </Card>
           ) : (
             pendingAssignments.map((assignment) => (
-              <Card key={assignment.id}>
+              <Card key={assignment.id} className="bg-white/90 backdrop-blur-sm border-[#ff7f00]/20 shadow-lg">
                 <CardHeader>
                   <div className="flex justify-between items-start">
                     <div>
-                      <CardTitle>{assignment.title}</CardTitle>
-                      <CardDescription>{assignment.subject}</CardDescription>
+                      <CardTitle className="text-[#191970]">{assignment.title}</CardTitle>
+                      <CardDescription className="text-[#019583]">{assignment.subject}</CardDescription>
                     </div>
-                    <Badge variant="outline" className="bg-yellow-100 text-yellow-800 border-yellow-200">
+                    <Badge className="bg-[#ff7f00]/20 text-[#ff7f00] border-[#ff7f00]/30">
                       Due: {new Date(assignment.dueDate).toLocaleDateString()}
                     </Badge>
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <p>{assignment.description}</p>
+                  <p className="text-[#191970]/80">{assignment.description}</p>
                 </CardContent>
                 <CardFooter className="flex justify-end">
                   <Dialog
@@ -123,41 +150,62 @@ export default function StudentAssignmentsContent() {
                     }}
                   >
                     <DialogTrigger asChild>
-                      <Button onClick={() => setSelectedAssignment(assignment)}>Submit Assignment</Button>
+                      <Button 
+                        onClick={() => setSelectedAssignment(assignment)}
+                        className="bg-[#ff7f00] hover:bg-[#ff7f00]/90 text-white"
+                      >
+                        Submit Assignment
+                      </Button>
                     </DialogTrigger>
-                    <DialogContent>
+                    <DialogContent className="bg-white/95 backdrop-blur-sm border-[#ff7f00]/20">
                       <DialogHeader>
-                        <DialogTitle>Submit Assignment</DialogTitle>
-                        <DialogDescription>
+                        <DialogTitle className="text-[#191970]">Submit Assignment</DialogTitle>
+                        <DialogDescription className="text-[#019583]">
                           {assignment.title} - Due: {new Date(assignment.dueDate).toLocaleDateString()}
                         </DialogDescription>
                       </DialogHeader>
                       <div className="space-y-4 py-4">
                         <div className="space-y-2">
-                          <Label htmlFor="submission">Your Answer</Label>
+                          <Label htmlFor="submission" className="text-[#191970]">Your Answer</Label>
                           <Textarea
                             id="submission"
                             placeholder="Type your answer here..."
                             value={submissionText}
                             onChange={(e) => setSubmissionText(e.target.value)}
-                            className="min-h-[150px]"
+                            className="min-h-[150px] border-[#ff7f00]/20 focus:border-[#ff7f00]"
                           />
                         </div>
                         <div className="space-y-2">
-                          <Label htmlFor="file">Attach Files (Optional)</Label>
+                          <Label htmlFor="file" className="text-[#191970]">Attach Files (Optional)</Label>
                           <div className="flex items-center gap-2">
-                            <Input id="file" type="file" />
-                            <Button size="icon" variant="outline">
-                              <FileUpload className="h-4 w-4" />
+                            <Input 
+                              id="file" 
+                              type="file" 
+                              className="border-[#ff7f00]/20 focus:border-[#ff7f00]"
+                            />
+                            <Button 
+                              size="icon" 
+                              variant="outline"
+                              className="border-[#ff7f00]/20 hover:bg-[#ff7f00]/10"
+                            >
+                              <FileUpload className="h-4 w-4 text-[#ff7f00]" />
                             </Button>
                           </div>
                         </div>
                       </div>
                       <DialogFooter>
-                        <Button variant="outline" onClick={() => setOpenDialog(false)}>
+                        <Button 
+                          variant="outline" 
+                          onClick={() => setOpenDialog(false)}
+                          className="border-[#ff7f00]/20 text-[#ff7f00] hover:bg-[#ff7f00]/10"
+                        >
                           Cancel
                         </Button>
-                        <Button onClick={handleSubmit} disabled={isSubmitting}>
+                        <Button 
+                          onClick={handleSubmit} 
+                          disabled={isSubmitting}
+                          className="bg-[#ff7f00] hover:bg-[#ff7f00]/90 text-white"
+                        >
                           {isSubmitting ? "Submitting..." : "Submit"}
                         </Button>
                       </DialogFooter>
@@ -171,29 +219,29 @@ export default function StudentAssignmentsContent() {
 
         <TabsContent value="completed" className="space-y-4">
           {completedAssignments.length === 0 ? (
-            <Card>
+            <Card className="bg-white/90 backdrop-blur-sm border-[#ff7f00]/20 shadow-lg">
               <CardContent className="pt-6">
-                <p className="text-center text-muted-foreground">No completed assignments</p>
+                <p className="text-center text-[#191970]/70">No completed assignments</p>
               </CardContent>
             </Card>
           ) : (
             completedAssignments.map((assignment) => (
-              <Card key={assignment.id}>
+              <Card key={assignment.id} className="bg-white/90 backdrop-blur-sm border-[#ff7f00]/20 shadow-lg">
                 <CardHeader>
                   <div className="flex justify-between items-start">
                     <div>
-                      <CardTitle>{assignment.title}</CardTitle>
-                      <CardDescription>{assignment.subject}</CardDescription>
+                      <CardTitle className="text-[#191970]">{assignment.title}</CardTitle>
+                      <CardDescription className="text-[#019583]">{assignment.subject}</CardDescription>
                     </div>
-                    <Badge variant="outline" className="bg-green-100 text-green-800 border-green-200">
+                    <Badge className="bg-[#a6c732]/20 text-[#a6c732] border-[#a6c732]/30">
                       Grade: {assignment.grade}
                     </Badge>
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <div className="flex justify-between text-sm text-muted-foreground mb-4">
+                  <div className="flex justify-between text-sm text-[#191970]/70 mb-4">
                     <span>Due: {new Date(assignment.dueDate).toLocaleDateString()}</span>
-                    <span>Submitted: {new Date(assignment.submittedDate).toLocaleDateString()}</span>
+                    <span>Submitted: {assignment.submittedDate ? new Date(assignment.submittedDate).toLocaleDateString() : 'Not submitted'}</span>
                   </div>
                 </CardContent>
                 <CardFooter className="flex justify-end">
@@ -204,22 +252,31 @@ export default function StudentAssignmentsContent() {
                     }}
                   >
                     <DialogTrigger asChild>
-                      <Button variant="outline" onClick={() => setViewFeedback(assignment)}>
+                      <Button 
+                        variant="outline" 
+                        onClick={() => setViewFeedback(assignment)}
+                        className="border-[#a6c732]/20 text-[#a6c732] hover:bg-[#a6c732]/10"
+                      >
                         View Feedback
                       </Button>
                     </DialogTrigger>
-                    <DialogContent>
+                    <DialogContent className="bg-white/95 backdrop-blur-sm border-[#ff7f00]/20">
                       <DialogHeader>
-                        <DialogTitle>Teacher Feedback</DialogTitle>
-                        <DialogDescription>
+                        <DialogTitle className="text-[#191970]">Teacher Feedback</DialogTitle>
+                        <DialogDescription className="text-[#019583]">
                           {assignment.title} - Grade: {assignment.grade}
                         </DialogDescription>
                       </DialogHeader>
                       <div className="py-4">
-                        <p>{assignment.feedback}</p>
+                        <p className="text-[#191970]/80">{assignment.feedback}</p>
                       </div>
                       <DialogFooter>
-                        <Button onClick={() => setViewFeedback(null)}>Close</Button>
+                        <Button 
+                          onClick={() => setViewFeedback(null)}
+                          className="bg-[#ff7f00] hover:bg-[#ff7f00]/90 text-white"
+                        >
+                          Close
+                        </Button>
                       </DialogFooter>
                     </DialogContent>
                   </Dialog>
