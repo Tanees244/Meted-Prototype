@@ -10,7 +10,7 @@ import { Card } from "@/components/ui/card"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { LockIcon, MailIcon } from "lucide-react"
 
-export function TeacherLoginForm() {
+export function StudentLoginForm() {
   const router = useRouter()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -31,9 +31,9 @@ export function TeacherLoginForm() {
       const isFirstLogin = email.includes("new")
 
       if (isFirstLogin) {
-        router.push("/teacher/change-password")
+        router.push("/student/change-password")
       } else {
-        router.push("/teacher/dashboard")
+        router.push("/student/dashboard")
       }
     } catch (err) {
       setError("Invalid email or password. Please try again.")
@@ -45,7 +45,7 @@ export function TeacherLoginForm() {
   return (
     <Card className="p-6 shadow-lg border-[#ff7f00]/20 bg-white/90 backdrop-blur-sm">
       <div className="mb-6 text-center">
-        <h1 className="text-2xl font-bold text-[#191970] mb-2">Teacher Login</h1>
+        <h1 className="text-2xl font-bold text-[#191970] mb-2">Student Login</h1>
         <p className="text-[#019583] text-sm">Enter your details to log in</p>
       </div>
       <form onSubmit={handleSubmit}>
@@ -64,7 +64,7 @@ export function TeacherLoginForm() {
               <Input
                 id="email"
                 type="email"
-                placeholder="teacher@meted.edu"
+                placeholder="student@meted.edu"
                 className="pl-10 border-[#ff7f00]/20 focus:border-[#ff7f00] focus:ring-[#ff7f00]/20"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -99,4 +99,4 @@ export function TeacherLoginForm() {
       </form>
     </Card>
   )
-}
+} 

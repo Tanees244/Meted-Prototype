@@ -1,35 +1,35 @@
 "use client"
 
+import { StudentLoginForm } from "@/components/student-login-form"
 import Image from "next/image"
-import { StudentLoginForm } from "@/components/student/student-login-form"
 
 export default function StudentLoginPage() {
   return (
-    <div className="min-h-screen grid grid-cols-1 lg:grid-cols-2 bg-gradient-to-br from-blue-400 via-blue-300 to-blue-200">
-      {/* Left side with illustration */}
-      <div className="hidden lg:flex items-center justify-center p-2 rounded-[5px] overflow-hidden">
-        <div className="relative w-full h-full rounded-2xl overflow-hidden">
-          <Image 
-            src="/homeschool.jpg"
-            alt="Student in classroom"
-            layout="fill"
-            objectFit="cover"
-            className="rounded-2xl"
-          />
+    <div className="min-h-screen flex">
+      {/* Left side - Illustration */}
+      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-[#191970] via-[#191970]/90 to-[#191970] relative overflow-hidden">
+        <div className="absolute inset-0 bg-[#ff7f00]/10 mix-blend-multiply" />
+        <div className="absolute inset-0 bg-[#019583]/10 mix-blend-multiply" />
+        <div className="relative z-10 flex items-center justify-center w-full h-full">
+          <div className="relative w-full h-full">
+            <Image
+              src="/teacher-giving-presentation-classroom.jpg"
+              alt="Student studying illustration"
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
         </div>
       </div>
 
-      {/* Right side with content (Student Login Form) */}
-      <div className="flex items-center justify-center p-8 lg:p-12 relative overflow-hidden">
-        {/* Geometric shapes background */}
-        <div className="absolute -bottom-16 -right-16 w-64 h-64 bg-blue-300/30 transform rotate-45"></div>
-        <div className="absolute -top-12 -left-12 w-48 h-48 bg-blue-300/20 transform rotate-45"></div>
-
-        <div className="w-full max-w-sm relative z-10">
+      {/* Right side - Login Form */}
+      <div className="w-full lg:w-1/2 bg-gradient-to-br from-[#191970] via-[#191970]/90 to-[#191970] flex items-center justify-center p-8">
+        <div className="w-full max-w-md">
           <StudentLoginForm />
-          <div className="mt-8 text-center text-xs text-blue-900/60">
-            © 2023 MetEd LMS. All rights reserved.
-          </div>
+          <p className="mt-8 text-center text-white/60 text-sm">
+            © 2024 Meted. All rights reserved.
+          </p>
         </div>
       </div>
     </div>
