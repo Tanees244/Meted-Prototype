@@ -151,12 +151,12 @@ export function StudentDashboardContent() {
         {/* Left Column */}
         <div className="lg:col-span-2 space-y-6">
           {/* Welcome Card */}
-          <Card className="bg-gradient-to-br from-[#C5D2FA] to-[#EDE8FE] border-none shadow-lg">
+          <Card className="bg-gradient-to-br from-[#24CAB6]/10 to-[#EDE8FE] border-none shadow-lg">
             <div className="flex justify-between items-center h-full">
               <div className="p-6">
-                <h2 className="text-2xl font-bold text-[#191970]">Welcome back, Mehdi</h2>
-                <p className="text-[#019583] mt-2">You've learned 70% of your goal this week!</p>
-                <p className="text-[#019583]">Keep it up and improve your progress.</p>
+                <h2 className="text-2xl font-bold text-black">Welcome back, Mehdi</h2>
+                <p className="text-black mt-2">You've learned 70% of your goal this week!</p>
+                <p className="text-black">Keep it up and improve your progress.</p>
               </div>
               {/* User Avatar */}
               <img src="/Humaaans Space.svg" alt="User avatar" className="h-[200px] w-auto object-cover" />
@@ -165,56 +165,56 @@ export function StudentDashboardContent() {
 
           {/* KPI Cards */}
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            <Card className="bg-[#191970] text-white border-none shadow-lg">
+            <Card className="bg-[#24CAB6] text-black border-none shadow-lg">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Upcoming Sessions</CardTitle>
-                <VideoIcon className="h-4 w-4 text-[#ff7f00]" />
+                <VideoIcon className="h-4 w-4 text-[#EAB308]" />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">{upcomingSessions.length}</div>
-                <p className="text-xs text-white/70">Scheduled for you</p>
+                <p className="text-xs text-black/70">Scheduled for you</p>
               </CardContent>
             </Card>
-            <Card className="bg-[#191970] text-white border-none shadow-lg">
+            <Card className="bg-[#24CAB6] text-black border-none shadow-lg">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Pending Assignments</CardTitle>
-                <FileTextIcon className="h-4 w-4 text-[#ff7f00]" />
+                <FileTextIcon className="h-4 w-4 text-[#EAB308]" />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">{assignments.filter((a) => a.status === "pending").length}</div>
-                <p className="text-xs text-white/70">Due soon</p>
+                <p className="text-xs text-black/70">Due soon</p>
               </CardContent>
             </Card>
-            <Card className="bg-[#191970] text-white border-none shadow-lg">
+            <Card className="bg-[#24CAB6] text-black border-none shadow-lg">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Completed Assignments</CardTitle>
-                <CheckCircleIcon className="h-4 w-4 text-[#ff7f00]" />
+                <CheckCircleIcon className="h-4 w-4 text-[#EAB308]" />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">{assignments.filter((a) => a.status === "completed").length}</div>
-                <p className="text-xs text-white/70">Submitted successfully</p>
+                <p className="text-xs text-black/70">Submitted successfully</p>
               </CardContent>
             </Card>
           </div>
 
           {/* Pending Assignments Card */}
-          <Card className="bg-white/90 backdrop-blur-sm border-[#ff7f00]/20 shadow-lg">
+          <Card className="bg-white/90 backdrop-blur-sm border-[#24CAB6]/20 shadow-lg">
             <CardHeader>
-              <CardTitle className="text-[#191970]">Pending Assignments</CardTitle>
-              <CardDescription className="text-[#019583]">Assignments due soon</CardDescription>
+              <CardTitle className="text-black">Pending Assignments</CardTitle>
+              <CardDescription className="text-black/70">Assignments due soon</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 {assignments.filter(a => a.status === "pending").map((assignment) => (
-                  <Alert key={assignment.id} className="bg-white/50 border-[#ff7f00]/20">
-                    <FileTextIcon className="h-4 w-4 text-[#ff7f00]" />
-                    <AlertTitle className="flex justify-between text-[#191970]">
+                  <Alert key={assignment.id} className="bg-white/50 border-[#24CAB6]/20">
+                    <FileTextIcon className="h-4 w-4 text-[#24CAB6]" />
+                    <AlertTitle className="flex justify-between text-black">
                       <span>{assignment.title}</span>
-                      <span className="text-xs text-[#019583]">Due: {assignment.dueDate}</span>
+                      <span className="text-xs text-black/70">Due: {assignment.dueDate}</span>
                     </AlertTitle>
-                    <AlertDescription className="mt-1 text-[#191970]/80">
+                    <AlertDescription className="mt-1 text-black/80">
                       <p>{assignment.description}</p>
-                      <p className="text-xs text-[#019583] mt-1">Subject: {assignment.subject}</p>
+                      <p className="text-xs text-black/70 mt-1">Subject: {assignment.subject}</p>
                     </AlertDescription>
                   </Alert>
                 ))}
@@ -223,27 +223,27 @@ export function StudentDashboardContent() {
           </Card>
 
           {/* Featured Resources Card */}
-          <Card className="bg-white/90 backdrop-blur-sm border-[#ff7f00]/20 shadow-lg">
+          <Card className="bg-white/90 backdrop-blur-sm border-[#24CAB6]/20 shadow-lg">
             <CardHeader>
-              <CardTitle className="text-[#191970]">Featured Resources</CardTitle>
-              <CardDescription className="text-[#019583]">Helpful materials for your studies</CardDescription>
+              <CardTitle className="text-black">Featured Resources</CardTitle>
+              <CardDescription className="text-black/70">Helpful materials for your studies</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 {featuredResources.map(resource => (
-                  <div key={resource.id} className="flex items-center space-x-3 p-3 bg-white/50 rounded-lg border border-[#ff7f00]/20">
-                    {resource.type === 'document' && <FileTextIcon className="h-5 w-5 text-[#ff7f00]" />}
-                    {resource.type === 'video' && <VideoIcon className="h-5 w-5 text-[#ff7f00]" />}
+                  <div key={resource.id} className="flex items-center space-x-3 p-3 bg-white/50 rounded-lg border border-[#24CAB6]/20">
+                    {resource.type === 'document' && <FileTextIcon className="h-5 w-5 text-[#24CAB6]" />}
+                    {resource.type === 'video' && <VideoIcon className="h-5 w-5 text-[#24CAB6]" />}
                     <div className="flex-1">
-                      <h4 className="font-medium text-[#191970]">{resource.title}</h4>
-                      <p className="text-sm text-[#019583]">{resource.description}</p>
+                      <h4 className="font-medium text-black">{resource.title}</h4>
+                      <p className="text-sm text-black/70">{resource.description}</p>
                     </div>
                   </div>
                 ))}
               </div>
               <Button
                 variant="outline"
-                className="mt-4 w-full border-[#ff7f00] text-[#ff7f00] hover:bg-[#ff7f00]/10"
+                className="mt-4 w-full border-[#24CAB6] text-black hover:bg-[#24CAB6]/10"
                 onClick={() => router.push('/student/resources')}
               >
                 See More Resources
@@ -255,12 +255,12 @@ export function StudentDashboardContent() {
         {/* Right Column */}
         <div className="lg:col-span-1 space-y-6">
           {/* Upcoming Sessions Card with Calendar */}
-          <Card className="bg-white border-[#C5D2FA] shadow-lg p-4">
-            <CardHeader className="p-0 pb-3 border-b border-[#C5D2FA]/50 mb-3">
-              <CardTitle className="text-[#191970] text-lg font-semibold">Upcoming Sessions</CardTitle>
+          <Card className="bg-white border-[#24CAB6]/20 shadow-lg p-4">
+            <CardHeader className="p-0 pb-3 border-b border-[#24CAB6]/20 mb-3">
+              <CardTitle className="text-black text-lg font-semibold">Upcoming Sessions</CardTitle>
             </CardHeader>
             <CardContent className="p-0">
-              <div className="border border-[#C5D2FA] rounded-md p-2">
+              <div className="border border-[#24CAB6]/20 rounded-md p-2">
                 <DayPicker
                   mode="single"
                   selected={selectedDate}
@@ -274,46 +274,46 @@ export function StudentDashboardContent() {
                   modifiersStyles={{
                     session: { 
                       fontWeight: 'bold', 
-                      border: '2px solid #ff7f00',
-                      backgroundColor: '#fff5e6',
-                      color: '#ff7f00',
+                      border: '2px solid #24CAB6',
+                      backgroundColor: '#24CAB6/10',
+                      color: '#24CAB6',
                       borderRadius: '50%'
                     },
                     today: {
-                      backgroundColor: '#191970',
-                      color: 'white',
+                      backgroundColor: '#24CAB6',
+                      color: 'black',
                       borderRadius: '50%'
                     },
                     selected: {
-                      backgroundColor: '#ff7f00',
-                      color: 'white',
+                      backgroundColor: '#EAB308',
+                      color: 'black',
                       borderRadius: '50%'
                     }
                   }}
                   styles={{
-                    caption: { color: '#191970', fontSize: '1rem', fontWeight: '600' },
+                    caption: { color: 'black', fontSize: '1rem', fontWeight: '600' },
                     day: { 
-                      color: '#191970',
+                      color: 'black',
                       margin: '0.1rem',
                       transition: 'all 0.2s ease'
                     },
                     head_cell: { 
-                      color: '#019583',
+                      color: 'black',
                       fontWeight: '600',
                       textTransform: 'uppercase',
                       fontSize: '0.75rem'
                     },
                     button: { 
-                      color: '#191970'
+                      color: 'black'
                     },
                     nav_button: { 
-                      color: '#191970'
+                      color: 'black'
                     },
                     nav_button_previous: { 
-                      color: '#191970'
+                      color: 'black'
                     },
                     nav_button_next: { 
-                      color: '#191970'
+                      color: 'black'
                     },
                     caption_label: {
                       fontSize: '1rem',
@@ -324,25 +324,25 @@ export function StudentDashboardContent() {
               </div>
               {sessionsForSelectedDate.length > 0 ? (
                 <div className="mt-3 space-y-2">
-                  <h3 className="text-[#191970] font-semibold text-sm">Sessions on {selectedDate && format(selectedDate, 'PPP')}</h3>
+                  <h3 className="text-black font-semibold text-sm">Sessions on {selectedDate && format(selectedDate, 'PPP')}</h3>
                   {sessionsForSelectedDate.map(session => (
-                    <div key={session.id} className="text-sm text-[#191970]/80 p-3 rounded-lg bg-[#fff5e6] border border-[#ff7f00]/20">
+                    <div key={session.id} className="text-sm text-black/80 p-3 rounded-lg bg-[#24CAB6]/5 border border-[#24CAB6]/20">
                       <div className="flex items-center justify-between">
                         <span className="font-medium">{session.subject}</span>
-                        <span className="text-[#ff7f00]">{session.time}</span>
+                        <span className="text-black/70">{session.time}</span>
                       </div>
                       <div className="flex items-center mt-1">
-                        <User className="h-3 w-3 mr-1 text-[#019583]" />
-                        <span className="text-[#019583]">with {session.teacher}</span>
+                        <User className="h-3 w-3 mr-1 text-[#24CAB6]" />
+                        <span className="text-black/70">with {session.teacher}</span>
                       </div>
                       <div className="flex items-center justify-between mt-2">
-                        <div className="flex items-center text-xs text-[#ff7f00]">
+                        <div className="flex items-center text-xs text-black/70">
                           <ClockIcon className="h-3 w-3 mr-1" />
                           <span>{session.duration}</span>
                         </div>
                         <Button
                           onClick={() => router.push('/student/live-sessions')}
-                          className="bg-[#ff7f00] hover:bg-[#ff7f00]/90 text-white text-xs px-3 py-1 h-7"
+                          className="bg-[#24CAB6] hover:bg-[#24CAB6]/90 text-black text-xs px-3 py-1 h-7"
                         >
                           Join Now
                         </Button>
@@ -351,7 +351,7 @@ export function StudentDashboardContent() {
                   ))}
                 </div>
               ) : (
-                <div className="mt-3 text-center py-3 text-[#191970]/60">
+                <div className="mt-3 text-center py-3 text-black/60">
                   <p>No sessions scheduled for this day</p>
                 </div>
               )}
@@ -359,21 +359,21 @@ export function StudentDashboardContent() {
           </Card>
 
           {/* Announcements Card */}
-          <Card className="bg-white/90 backdrop-blur-sm border-[#ff7f00]/20 shadow-lg">
+          <Card className="bg-white/90 backdrop-blur-sm border-[#24CAB6]/20 shadow-lg">
             <CardHeader>
-              <CardTitle className="text-[#191970]">Announcements</CardTitle>
-              <CardDescription className="text-[#019583]">Latest updates and news</CardDescription>
+              <CardTitle className="text-black">Announcements</CardTitle>
+              <CardDescription className="text-black/70">Latest updates and news</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 {announcements.map((announcement) => (
-                  <div key={announcement.id} className="p-3 bg-white/50 rounded-lg border border-[#ff7f00]/20">
+                  <div key={announcement.id} className="p-3 bg-white/50 rounded-lg border border-[#24CAB6]/20">
                     <div className="flex items-start justify-between">
                       <div>
-                        <h4 className="font-medium text-[#191970]">{announcement.title}</h4>
-                        <p className="text-sm text-[#191970]/80 mt-1">{announcement.description}</p>
+                        <h4 className="font-medium text-black">{announcement.title}</h4>
+                        <p className="text-sm text-black/80 mt-1">{announcement.description}</p>
                       </div>
-                      <span className="text-xs text-[#019583]">{announcement.date}</span>
+                      <span className="text-xs text-black/70">{announcement.date}</span>
                     </div>
                   </div>
                 ))}

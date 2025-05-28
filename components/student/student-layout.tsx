@@ -27,6 +27,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { useRouter } from "next/navigation"
 
 const sidebarLinks = [
   {
@@ -63,6 +64,7 @@ const sidebarLinks = [
 
 export default function StudentLayout({ children }: { children: React.ReactNode }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const router = useRouter()
   const pathname = usePathname()
 
   return (
@@ -70,7 +72,7 @@ export default function StudentLayout({ children }: { children: React.ReactNode 
       {/* Mobile Sidebar Toggle */}
       <button
         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-        className="fixed top-4 left-4 z-50 p-2 rounded-md bg-[#191970] text-white lg:hidden"
+        className="fixed top-4 left-4 z-50 p-2 rounded-md bg-[#24CAB6] text-black lg:hidden"
       >
         {isSidebarOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
       </button>
@@ -78,79 +80,92 @@ export default function StudentLayout({ children }: { children: React.ReactNode 
       {/* Sidebar */}
       <aside
         className={cn(
-          "fixed inset-y-4 left-4 z-40 w-64 transform rounded-xl bg-[#191970] text-white transition-transform duration-200 ease-in-out lg:translate-x-0 shadow-xl",
+          "fixed inset-y-4 left-4 z-40 w-64 transform rounded-xl bg-[#24CAB6] transition-transform duration-200 ease-in-out lg:translate-x-0 shadow-xl",
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >
-        <div className="flex h-8 items-center justify-between px-6 pt-12 pb-8">
-          <h1 className="text-2xl font-bold">MetEd Student</h1>
+        {/* Logo and Title */}
+        <div className="p-4 border-b border-black/10">
+          <div className="flex items-center space-x-2">
+            <h1 className="text-2xl font-bold text-black">MetEd</h1>
+          </div>
+          <p className="text-sm text-black mt-1">Student Portal</p>
         </div>
-        <nav className="space-y-1 p-6">
-          {sidebarLinks.map((link) => {
-            const isActive = pathname === link.href
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={cn(
-                  "flex items-center space-x-3 rounded-lg px-4 py-3 text-sm font-medium transition-colors",
-                  isActive
-                    ? "bg-[#ff7f00] text-white shadow-lg shadow-[#ff7f00]/20"
-                    : "text-white/70 hover:bg-[#ff7f00]/10 hover:text-white"
-                )}
-              >
-                <link.icon className="h-5 w-5" />
-                <span>{link.title}</span>
-              </Link>
-            )
-          })}
-        </nav>
-        <div className="absolute bottom-0 w-full py-0">
-          <div className="space-y-2">
-            {/* Notification and Settings Section */}
-            <div className="flex flex-col gap-2">
-              {/* <Button
-                variant="ghost"
-                className="w-full justify-start space-x-3 text-white/70 hover:bg-[#ff7f00]/10 hover:text-white rounded-lg px-4 py-3"
-              >
-                <Bell className="h-5 w-5" />
-                <span className="text-sm font-medium">Notifications</span>
-              </Button> */}
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  {/* <Button
-                    variant="ghost"
-                    className="w-full justify-start space-x-3 text-white/70 hover:bg-[#ff7f00]/10 hover:text-white rounded-lg px-4 py-3"
-                  >
-                    <User className="h-5 w-5" />
-                    <span className="text-sm font-medium">Account</span>
-                  </Button> */}
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-56 bg-white border-[#ff7f00]/20">
-                  <DropdownMenuLabel className="text-[#191970]">My Account</DropdownMenuLabel>
-                  <DropdownMenuSeparator className="bg-[#ff7f00]/20" />
-                  <DropdownMenuItem className="text-[#191970] hover:bg-[#ff7f00]/10 hover:text-[#ff7f00]">
-                    Profile
-                  </DropdownMenuItem>
-                  <DropdownMenuItem className="text-[#191970] hover:bg-[#ff7f00]/10 hover:text-[#ff7f00]">
-                    Settings
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator className="bg-[#ff7f00]/20" />
-                  <DropdownMenuItem className="text-[#191970] hover:bg-[#ff7f00]/10 hover:text-[#ff7f00]">
-                    Logout
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
 
-            {/* Logout Button */}
-            <Button
-              variant="ghost"
-              className="w-full justify-start space-x-3 text-white/70 hover:bg-[#ff7f00]/10 hover:text-white rounded-lg px-10 py-12"
-            >
-              <LogOut className="h-5 w-5" />
-              <span className="text-sm font-medium">Logout</span>
-            </Button>
+        {/* Navigation */}
+        <nav className="flex-1 p-4 space-y-2">
+          <Button
+            variant="ghost"
+            className={`w-full justify-start ${
+              pathname === "/student/dashboard"
+                ? "bg-[#EAB308] text-white hover:bg-[#EAB308]/90"
+                : "text-black hover:bg-black/10"
+            }`}
+            onClick={() => router.push("/student/dashboard")}
+          >
+            <LayoutDashboard className="mr-2 h-4 w-4" />
+            Dashboard
+          </Button>
+          <Button
+            variant="ghost"
+            className={`w-full justify-start ${
+              pathname === "/student/assignments"
+                ? "bg-[#EAB308] text-white hover:bg-[#EAB308]/90"
+                : "text-black hover:bg-black/10"
+            }`}
+            onClick={() => router.push("/student/assignments")}
+          >
+            <FileText className="mr-2 h-4 w-4" />
+            Assignments
+          </Button>
+          <Button
+            variant="ghost"
+            className={`w-full justify-start ${
+              pathname === "/student/schedule"
+                ? "bg-[#EAB308] text-white hover:bg-[#EAB308]/90"
+                : "text-black hover:bg-black/10"
+            }`}
+            onClick={() => router.push("/student/schedule")}
+          >
+            <Calendar className="mr-2 h-4 w-4" />
+            Schedule
+          </Button>
+          <Button
+            variant="ghost"
+            className={`w-full justify-start ${
+              pathname === "/student/resources"
+                ? "bg-[#EAB308] text-white hover:bg-[#EAB308]/90"
+                : "text-black hover:bg-black/10"
+            }`}
+            onClick={() => router.push("/student/resources")}
+          >
+            <BookOpen className="mr-2 h-4 w-4" />
+            Resources
+          </Button>
+          <Button
+            variant="ghost"
+            className={`w-full justify-start ${
+              pathname === "/student/live-sessions"
+                ? "bg-[#EAB308] text-white hover:bg-[#EAB308]/90"
+                : "text-black hover:bg-black/10"
+            }`}
+            onClick={() => router.push("/student/live-sessions")}
+          >
+            <Video className="mr-2 h-4 w-4" />
+            Live Sessions
+          </Button>
+        </nav>
+
+        {/* User Profile */}
+        <div className="p-4 border-t border-black/10">
+          <div className="flex items-center space-x-3">
+            <div className="h-8 w-8 rounded-full bg-black/10 flex items-center justify-center">
+              <User className="h-4 w-4 text-black" />
+            </div>
+            <div>
+              <p className="text-sm font-medium text-black">Mehdi</p>
+              <p className="text-xs text-black">Student</p>
+            </div>
           </div>
         </div>
       </aside>
