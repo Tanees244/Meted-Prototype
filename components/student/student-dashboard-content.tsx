@@ -145,76 +145,111 @@ export function StudentDashboardContent() {
   }
 
   return (
-    <div className="space-y-6 bg-[#EDE8FE] rounded-lg  min-h-screen w-full">
+    <div className="space-y-6 bg-gradient-to-br from-blue-50/50 via-violet-50/30 to-fuchsia-50/30 rounded-lg min-h-screen w-full p-6">
       {/* Main content grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left Column */}
         <div className="lg:col-span-2 space-y-6">
           {/* Welcome Card */}
-          <Card className="bg-gradient-to-br from-[#24CAB6]/10 to-[#EDE8FE] border-none shadow-lg">
-            <div className="flex justify-between items-center h-full">
-              <div className="p-6">
-                <h2 className="text-2xl font-bold text-black">Welcome back, Mehdi</h2>
-                <p className="text-black mt-2">You've learned 70% of your goal this week!</p>
-                <p className="text-black">Keep it up and improve your progress.</p>
+          <Card className="card overflow-hidden bg-gradient-to-br from-blue-500 via-violet-500 to-fuchsia-500 shadow-xl">
+            <div className="relative">
+              {/* Decorative elements */}
+              <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
+              <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-blue-400/30 to-violet-400/30 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+              <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-fuchsia-400/30 to-violet-400/30 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+              
+              <div className="relative flex justify-between items-center h-full p-8">
+                <div className="space-y-4">
+                  <div className="space-y-2">
+                    <h2 className="text-3xl font-bold text-white">Welcome back, Mehdi! 👋</h2>
+                    <p className="text-blue-100 text-lg">Ready to continue your learning journey?</p>
+                  </div>
+                  
+                  <div className="space-y-3">
+                    <div className="flex items-center space-x-2">
+                      <div className="w-full bg-white/20 rounded-full h-2.5">
+                        <div className="bg-white h-2.5 rounded-full" style={{ width: '70%' }}></div>
+                      </div>
+                      <span className="text-white font-medium">70%</span>
+                    </div>
+                    <p className="text-violet-100">You've completed 70% of your weekly goal!</p>
+                  </div>
+
+                  <div className="flex space-x-4">
+                    <Button className="bg-white text-blue-600 hover:bg-blue-50 transition-all duration-200">
+                      View Progress
+                    </Button>
+                    <Button className="bg-white/20 text-white hover:bg-white/30 transition-all duration-200">
+                      Set New Goals
+                    </Button>
+                  </div>
+                </div>
+                
+                {/* User Avatar with decorative border */}
+                <div className="relative">
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-fuchsia-400 rounded-full blur-lg animate-pulse"></div>
+                  <img 
+                    src="/Humaaans Space.svg" 
+                    alt="User avatar" 
+                    className="relative h-[200px] w-auto object-cover"
+                  />
+                </div>
               </div>
-              {/* User Avatar */}
-              <img src="/Humaaans Space.svg" alt="User avatar" className="h-[200px] w-auto object-cover" />
             </div>
           </Card>
 
           {/* KPI Cards */}
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            <Card className="bg-[#24CAB6] text-black border-none shadow-lg">
+            <Card className="card bg-gradient-to-br from-blue-400 to-blue-600 text-white shadow-lg">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Upcoming Sessions</CardTitle>
-                <VideoIcon className="h-4 w-4 text-[#EAB308]" />
+                <VideoIcon className="h-4 w-4" />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">{upcomingSessions.length}</div>
-                <p className="text-xs text-black/70">Scheduled for you</p>
+                <p className="text-xs text-blue-100">Scheduled for you</p>
               </CardContent>
             </Card>
-            <Card className="bg-[#24CAB6] text-black border-none shadow-lg">
+            <Card className="card bg-gradient-to-br from-violet-400 to-violet-600 text-white shadow-lg">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Pending Assignments</CardTitle>
-                <FileTextIcon className="h-4 w-4 text-[#EAB308]" />
+                <FileTextIcon className="h-4 w-4" />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">{assignments.filter((a) => a.status === "pending").length}</div>
-                <p className="text-xs text-black/70">Due soon</p>
+                <p className="text-xs text-violet-100">Due soon</p>
               </CardContent>
             </Card>
-            <Card className="bg-[#24CAB6] text-black border-none shadow-lg">
+            <Card className="card bg-gradient-to-br from-fuchsia-400 to-fuchsia-600 text-white shadow-lg">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Completed Assignments</CardTitle>
-                <CheckCircleIcon className="h-4 w-4 text-[#EAB308]" />
+                <CheckCircleIcon className="h-4 w-4" />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">{assignments.filter((a) => a.status === "completed").length}</div>
-                <p className="text-xs text-black/70">Submitted successfully</p>
+                <p className="text-xs text-fuchsia-100">Submitted successfully</p>
               </CardContent>
             </Card>
           </div>
 
           {/* Pending Assignments Card */}
-          <Card className="bg-white/90 backdrop-blur-sm border-[#24CAB6]/20 shadow-lg">
+          <Card className="card bg-gradient-to-br from-blue-50 to-violet-50 shadow-lg">
             <CardHeader>
-              <CardTitle className="text-black">Pending Assignments</CardTitle>
-              <CardDescription className="text-black/70">Assignments due soon</CardDescription>
+              <CardTitle className="text-blue-900">Pending Assignments</CardTitle>
+              <CardDescription className="text-violet-700">Assignments due soon</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 {assignments.filter(a => a.status === "pending").map((assignment) => (
-                  <Alert key={assignment.id} className="bg-white/50 border-[#24CAB6]/20">
-                    <FileTextIcon className="h-4 w-4 text-[#24CAB6]" />
-                    <AlertTitle className="flex justify-between text-black">
+                  <Alert key={assignment.id} className="bg-white/80 border-violet-200 shadow-sm">
+                    <FileTextIcon className="h-4 w-4 text-violet-600" />
+                    <AlertTitle className="flex justify-between text-blue-900">
                       <span>{assignment.title}</span>
-                      <span className="text-xs text-black/70">Due: {assignment.dueDate}</span>
+                      <span className="text-xs text-violet-700">Due: {assignment.dueDate}</span>
                     </AlertTitle>
-                    <AlertDescription className="mt-1 text-black/80">
+                    <AlertDescription className="mt-1 text-blue-800">
                       <p>{assignment.description}</p>
-                      <p className="text-xs text-black/70 mt-1">Subject: {assignment.subject}</p>
+                      <p className="text-xs text-violet-700 mt-1">Subject: {assignment.subject}</p>
                     </AlertDescription>
                   </Alert>
                 ))}
@@ -223,27 +258,26 @@ export function StudentDashboardContent() {
           </Card>
 
           {/* Featured Resources Card */}
-          <Card className="bg-white/90 backdrop-blur-sm border-[#24CAB6]/20 shadow-lg">
+          <Card className="card bg-gradient-to-br from-violet-50 to-fuchsia-50 shadow-lg">
             <CardHeader>
-              <CardTitle className="text-black">Featured Resources</CardTitle>
-              <CardDescription className="text-black/70">Helpful materials for your studies</CardDescription>
+              <CardTitle className="text-violet-900">Featured Resources</CardTitle>
+              <CardDescription className="text-fuchsia-700">Helpful materials for your studies</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 {featuredResources.map(resource => (
-                  <div key={resource.id} className="flex items-center space-x-3 p-3 bg-white/50 rounded-lg border border-[#24CAB6]/20">
-                    {resource.type === 'document' && <FileTextIcon className="h-5 w-5 text-[#24CAB6]" />}
-                    {resource.type === 'video' && <VideoIcon className="h-5 w-5 text-[#24CAB6]" />}
+                  <div key={resource.id} className="flex items-center space-x-3 p-3 bg-white/80 rounded-lg border border-fuchsia-200 shadow-sm">
+                    {resource.type === 'document' && <FileTextIcon className="h-5 w-5 text-fuchsia-600" />}
+                    {resource.type === 'video' && <VideoIcon className="h-5 w-5 text-fuchsia-600" />}
                     <div className="flex-1">
-                      <h4 className="font-medium text-black">{resource.title}</h4>
-                      <p className="text-sm text-black/70">{resource.description}</p>
+                      <h4 className="font-medium text-violet-900">{resource.title}</h4>
+                      <p className="text-sm text-fuchsia-700">{resource.description}</p>
                     </div>
                   </div>
                 ))}
               </div>
               <Button
-                variant="outline"
-                className="mt-4 w-full border-[#24CAB6] text-black hover:bg-[#24CAB6]/10"
+                className="bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white hover:from-violet-600 hover:to-fuchsia-600 transition-all duration-200 mt-4 w-full shadow-md"
                 onClick={() => router.push('/student/resources')}
               >
                 See More Resources
@@ -253,128 +287,70 @@ export function StudentDashboardContent() {
         </div>
 
         {/* Right Column */}
-        <div className="lg:col-span-1 space-y-6">
-          {/* Upcoming Sessions Card with Calendar */}
-          <Card className="bg-white border-[#24CAB6]/20 shadow-lg p-4">
-            <CardHeader className="p-0 pb-3 border-b border-[#24CAB6]/20 mb-3">
-              <CardTitle className="text-black text-lg font-semibold">Upcoming Sessions</CardTitle>
+        <div className="space-y-6">
+          {/* Calendar Card */}
+          <Card className="card bg-gradient-to-br from-blue-50 to-violet-50 shadow-lg">
+            <CardHeader>
+              <CardTitle className="text-blue-900">Calendar</CardTitle>
+              <CardDescription className="text-violet-700">View your schedule</CardDescription>
             </CardHeader>
-            <CardContent className="p-0">
-              <div className="border border-[#24CAB6]/20 rounded-md p-2">
-                <DayPicker
-                  mode="single"
-                  selected={selectedDate}
-                  onSelect={setSelectedDate}
-                  className="!bg-white"
-                  modifiers={{
-                    session: upcomingSessions.map(session => session.date),
-                    today: new Date(),
-                    selected: selectedDate
-                  }}
-                  modifiersStyles={{
-                    session: { 
-                      fontWeight: 'bold', 
-                      border: '2px solid #24CAB6',
-                      backgroundColor: '#24CAB6/10',
-                      color: '#24CAB6',
-                      borderRadius: '50%'
-                    },
-                    today: {
-                      backgroundColor: '#24CAB6',
-                      color: 'black',
-                      borderRadius: '50%'
-                    },
-                    selected: {
-                      backgroundColor: '#EAB308',
-                      color: 'black',
-                      borderRadius: '50%'
-                    }
-                  }}
-                  styles={{
-                    caption: { color: 'black', fontSize: '1rem', fontWeight: '600' },
-                    day: { 
-                      color: 'black',
-                      margin: '0.1rem',
-                      transition: 'all 0.2s ease'
-                    },
-                    head_cell: { 
-                      color: 'black',
-                      fontWeight: '600',
-                      textTransform: 'uppercase',
-                      fontSize: '0.75rem'
-                    },
-                    button: { 
-                      color: 'black'
-                    },
-                    nav_button: { 
-                      color: 'black'
-                    },
-                    nav_button_previous: { 
-                      color: 'black'
-                    },
-                    nav_button_next: { 
-                      color: 'black'
-                    },
-                    caption_label: {
-                      fontSize: '1rem',
-                      fontWeight: '600'
-                    }
-                  }}
-                />
-              </div>
-              {sessionsForSelectedDate.length > 0 ? (
-                <div className="mt-3 space-y-2">
-                  <h3 className="text-black font-semibold text-sm">Sessions on {selectedDate && format(selectedDate, 'PPP')}</h3>
-                  {sessionsForSelectedDate.map(session => (
-                    <div key={session.id} className="text-sm text-black/80 p-3 rounded-lg bg-[#24CAB6]/5 border border-[#24CAB6]/20">
-                      <div className="flex items-center justify-between">
-                        <span className="font-medium">{session.subject}</span>
-                        <span className="text-black/70">{session.time}</span>
+            <CardContent>
+              <DayPicker
+                mode="single"
+                selected={selectedDate}
+                onSelect={setSelectedDate}
+                className="border-violet-200 rounded-lg"
+              />
+            </CardContent>
+          </Card>
+
+          {/* Upcoming Sessions Card */}
+          <Card className="card bg-gradient-to-br from-violet-50 to-fuchsia-50 shadow-lg">
+            <CardHeader>
+              <CardTitle className="text-violet-900">Upcoming Sessions</CardTitle>
+              <CardDescription className="text-fuchsia-700">Your next learning sessions</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {sessionsForSelectedDate.map((session) => (
+                  <div key={session.id} className="p-4 bg-white/80 rounded-lg border border-fuchsia-200 shadow-sm">
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <h4 className="font-medium text-violet-900">{session.subject}</h4>
+                        <p className="text-sm text-fuchsia-700">with {session.teacher}</p>
                       </div>
-                      <div className="flex items-center mt-1">
-                        <User className="h-3 w-3 mr-1 text-[#24CAB6]" />
-                        <span className="text-black/70">with {session.teacher}</span>
-                      </div>
-                      <div className="flex items-center justify-between mt-2">
-                        <div className="flex items-center text-xs text-black/70">
-                          <ClockIcon className="h-3 w-3 mr-1" />
-                          <span>{session.duration}</span>
-                        </div>
-                        <Button
-                          onClick={() => router.push('/student/live-sessions')}
-                          className="bg-[#24CAB6] hover:bg-[#24CAB6]/90 text-black text-xs px-3 py-1 h-7"
-                        >
-                          Join Now
-                        </Button>
-                      </div>
+                      <Badge className="bg-fuchsia-100 text-fuchsia-700 border border-fuchsia-200">{
+                        session.duration}</Badge>
                     </div>
-                  ))}
-                </div>
-              ) : (
-                <div className="mt-3 text-center py-3 text-black/60">
-                  <p>No sessions scheduled for this day</p>
-                </div>
-              )}
+                    <div className="mt-2 flex items-center text-sm text-violet-700">
+                      <ClockIcon className="h-4 w-4 mr-1" />
+                      {session.time}
+                    </div>
+                    <Button
+                      className="bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white hover:from-violet-600 hover:to-fuchsia-600 transition-all duration-200 mt-3 w-full shadow-md"
+                      onClick={() => joinSession(session.id)}
+                    >
+                      Join Session
+                    </Button>
+                  </div>
+                ))}
+              </div>
             </CardContent>
           </Card>
 
           {/* Announcements Card */}
-          <Card className="bg-white/90 backdrop-blur-sm border-[#24CAB6]/20 shadow-lg">
+          <Card className="card bg-gradient-to-br from-fuchsia-50 to-pink-50 shadow-lg">
             <CardHeader>
-              <CardTitle className="text-black">Announcements</CardTitle>
-              <CardDescription className="text-black/70">Latest updates and news</CardDescription>
+              <CardTitle className="text-fuchsia-900">Announcements</CardTitle>
+              <CardDescription className="text-pink-700">Latest updates</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 {announcements.map((announcement) => (
-                  <div key={announcement.id} className="p-3 bg-white/50 rounded-lg border border-[#24CAB6]/20">
-                    <div className="flex items-start justify-between">
-                      <div>
-                        <h4 className="font-medium text-black">{announcement.title}</h4>
-                        <p className="text-sm text-black/80 mt-1">{announcement.description}</p>
-                      </div>
-                      <span className="text-xs text-black/70">{announcement.date}</span>
-                    </div>
+                  <div key={announcement.id} className="p-4 bg-white/80 rounded-lg border border-pink-200 shadow-sm">
+                    <h4 className="font-medium text-fuchsia-900">{announcement.title}</h4>
+                    <p className="text-sm text-pink-700 mt-1">{announcement.description}</p>
+                    <p className="text-xs text-pink-600 mt-2">{announcement.date}</p>
                   </div>
                 ))}
               </div>
