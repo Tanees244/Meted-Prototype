@@ -51,7 +51,7 @@ const upcomingSessions = [
     duration: "45 minutes",
     date: new Date(),
   },
-  
+
   {
     id: 3,
     teacher: "Mrs. Brown",
@@ -145,112 +145,89 @@ export function StudentDashboardContent() {
   }
 
   return (
-    <div className="space-y-6 bg-gradient-to-br from-blue-50/50 via-violet-50/30 to-fuchsia-50/30 rounded-lg min-h-screen w-full p-6">
+    <div className="space-y-6 bg-[#E9F8FB] rounded-lg min-h-screen w-full">
       {/* Main content grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left Column */}
         <div className="lg:col-span-2 space-y-6">
           {/* Welcome Card */}
-          <Card className="card overflow-hidden bg-gradient-to-br from-blue-500 via-violet-500 to-fuchsia-500 shadow-xl">
-            <div className="relative">
-              {/* Decorative elements */}
-              <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
-              <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-blue-400/30 to-violet-400/30 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-              <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-fuchsia-400/30 to-violet-400/30 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
-              
-              <div className="relative flex justify-between items-center h-full p-8">
-                <div className="space-y-4">
-                  <div className="space-y-2">
-                    <h2 className="text-3xl font-bold text-white">Welcome back, Mehdi! 👋</h2>
-                    <p className="text-blue-100 text-lg">Ready to continue your learning journey?</p>
-                  </div>
-                  
-                  <div className="space-y-3">
-                    <div className="flex items-center space-x-2">
-                      <div className="w-full bg-white/20 rounded-full h-2.5">
-                        <div className="bg-white h-2.5 rounded-full" style={{ width: '70%' }}></div>
-                      </div>
-                      <span className="text-white font-medium">70%</span>
-                    </div>
-                    <p className="text-violet-100">You've completed 70% of your weekly goal!</p>
-                  </div>
-
-                  <div className="flex space-x-4">
-                    <Button className="bg-white text-blue-600 hover:bg-blue-50 transition-all duration-200">
-                      View Progress
-                    </Button>
-                    <Button className="bg-white/20 text-white hover:bg-white/30 transition-all duration-200">
-                      Set New Goals
-                    </Button>
-                  </div>
+          <Card className="card overflow-hidden bg-white shadow-lg border border-[#E0F2F1]">
+            <div className="relative flex justify-between items-center h-full p-8">
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  <h2 className="text-3xl font-bold text-[#1BA7BC]">Welcome back, Mehdi!</h2>
+                  <p className="text-[#1BA7BC] text-lg">You've completed <span className='font-bold'>70%</span> of your goal this week. Keep it up and pursue your progress!</p>
                 </div>
-                
-                {/* User Avatar with decorative border */}
-                <div className="relative">
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-fuchsia-400 rounded-full blur-lg animate-pulse"></div>
-                  <img 
-                    src="/Humaaans Space.svg" 
-                    alt="User avatar" 
-                    className="relative h-[200px] w-auto object-cover"
-                  />
+                <div className="flex space-x-4">
+                  <Button className="bg-[#1BA7BC] text-white hover:bg-[#37B8C6] transition-all duration-200">
+                    View Progress
+                  </Button>
+                  <Button className="bg-[#E0F7FA] text-[#1BA7BC] hover:bg-[#BDECF6] transition-all duration-200">
+                    Set New Goals
+                  </Button>
                 </div>
+              </div>
+              <div className="relative mt-6">
+                <img src="/Humaaans Space.svg" alt="User avatar" className="relative h-[180px] w-auto object-cover" />
               </div>
             </div>
           </Card>
 
           {/* KPI Cards */}
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            <Card className="card bg-gradient-to-br from-blue-400 to-blue-600 text-white shadow-lg">
+            <Card className="card bg-white shadow-md border border-[#E0F2F1]">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Upcoming Sessions</CardTitle>
-                <VideoIcon className="h-4 w-4" />
+                <CardTitle className="text-sm font-bold text-[#1BA7BC]">Upcoming Sessions</CardTitle>
+                <VideoIcon className="h-5 w-5 text-[#1BA7BC]" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{upcomingSessions.length}</div>
-                <p className="text-xs text-blue-100">Scheduled for you</p>
+                <div className="text-3xl font-bold text-[#1BA7BC] mb-1">{upcomingSessions.length}</div>
+                <p className="text-xs text-[#1BA7BC] font-medium">Scheduled for you</p>
               </CardContent>
             </Card>
-            <Card className="card bg-gradient-to-br from-violet-400 to-violet-600 text-white shadow-lg">
+            <Card className="card bg-white shadow-md border border-[#E0F2F1]">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Pending Assignments</CardTitle>
-                <FileTextIcon className="h-4 w-4" />
+                <CardTitle className="text-sm font-bold text-[#1BA7BC]">Pending Assignments</CardTitle>
+                <FileTextIcon className="h-5 w-5 text-[#1BA7BC]" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{assignments.filter((a) => a.status === "pending").length}</div>
-                <p className="text-xs text-violet-100">Due soon</p>
+                <div className="text-3xl font-bold text-[#1BA7BC] mb-1">{assignments.filter((a) => a.status === "pending").length}</div>
+                <p className="text-xs text-[#1BA7BC] font-medium">Due soon</p>
               </CardContent>
             </Card>
-            <Card className="card bg-gradient-to-br from-fuchsia-400 to-fuchsia-600 text-white shadow-lg">
+            <Card className="card bg-white shadow-md border border-[#E0F2F1]">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Completed Assignments</CardTitle>
-                <CheckCircleIcon className="h-4 w-4" />
+                <CardTitle className="text-sm font-bold text-[#1BA7BC]">Completed Assignments</CardTitle>
+                <CheckCircleIcon className="h-5 w-5 text-[#1BA7BC]" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{assignments.filter((a) => a.status === "completed").length}</div>
-                <p className="text-xs text-fuchsia-100">Submitted successfully</p>
+                <div className="text-3xl font-bold text-[#1BA7BC] mb-1">{assignments.filter((a) => a.status === "completed").length}</div>
+                <p className="text-xs text-[#1BA7BC] font-medium">Submitted successfully</p>
               </CardContent>
             </Card>
           </div>
 
           {/* Pending Assignments Card */}
-          <Card className="card bg-gradient-to-br from-blue-50 to-violet-50 shadow-lg">
+          <Card className="card bg-white shadow-md border border-[#E0F2F1]">
             <CardHeader>
-              <CardTitle className="text-blue-900">Pending Assignments</CardTitle>
-              <CardDescription className="text-violet-700">Assignments due soon</CardDescription>
+              <CardTitle className="text-[#1BA7BC] font-bold">Pending Assignments</CardTitle>
+              <CardDescription className="text-[#1BA7BC]">Assignments due soon</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 {assignments.filter(a => a.status === "pending").map((assignment) => (
-                  <Alert key={assignment.id} className="bg-white/80 border-violet-200 shadow-sm">
-                    <FileTextIcon className="h-4 w-4 text-violet-600" />
-                    <AlertTitle className="flex justify-between text-blue-900">
-                      <span>{assignment.title}</span>
-                      <span className="text-xs text-violet-700">Due: {assignment.dueDate}</span>
-                    </AlertTitle>
-                    <AlertDescription className="mt-1 text-blue-800">
-                      <p>{assignment.description}</p>
-                      <p className="text-xs text-violet-700 mt-1">Subject: {assignment.subject}</p>
-                    </AlertDescription>
+                  <Alert key={assignment.id} className="bg-[#E0F7FA] border-[#E0F2F1] shadow-sm flex items-center gap-3">
+                    <FileTextIcon className="h-5 w-5 text-[#1BA7BC]" />
+                    <div className="flex-1">
+                      <AlertTitle className="text-[#1BA7BC] font-bold">{assignment.title}</AlertTitle>
+                      <AlertDescription className="mt-1 text-[#1BA7BC]">
+                        {assignment.description}
+                        <div className="flex justify-between mt-1">
+                          <span className="text-xs text-[#1BA7BC] font-semibold">Due: {assignment.dueDate}</span>
+                          <span className="text-xs text-[#FF9800] font-semibold">Due soon</span>
+                        </div>
+                      </AlertDescription>
+                    </div>
                   </Alert>
                 ))}
               </div>
@@ -258,28 +235,25 @@ export function StudentDashboardContent() {
           </Card>
 
           {/* Featured Resources Card */}
-          <Card className="card bg-gradient-to-br from-violet-50 to-fuchsia-50 shadow-lg">
+          <Card className="card bg-white shadow-md border border-[#E0F2F1]">
             <CardHeader>
-              <CardTitle className="text-violet-900">Featured Resources</CardTitle>
-              <CardDescription className="text-fuchsia-700">Helpful materials for your studies</CardDescription>
+              <CardTitle className="text-[#1BA7BC] font-bold">Featured Resources</CardTitle>
+              <CardDescription className="text-[#1BA7BC]">Helpful materials for your studies</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 {featuredResources.map(resource => (
-                  <div key={resource.id} className="flex items-center space-x-3 p-3 bg-white/80 rounded-lg border border-fuchsia-200 shadow-sm">
-                    {resource.type === 'document' && <FileTextIcon className="h-5 w-5 text-fuchsia-600" />}
-                    {resource.type === 'video' && <VideoIcon className="h-5 w-5 text-fuchsia-600" />}
+                  <div key={resource.id} className="flex items-center space-x-3 p-3 bg-[#E0F7FA] rounded-lg border border-[#E0F2F1] shadow-sm">
+                    {resource.type === 'document' && <FileTextIcon className="h-5 w-5 text-[#1BA7BC]" />}
+                    {resource.type === 'video' && <VideoIcon className="h-5 w-5 text-[#1BA7BC]" />}
                     <div className="flex-1">
-                      <h4 className="font-medium text-violet-900">{resource.title}</h4>
-                      <p className="text-sm text-fuchsia-700">{resource.description}</p>
+                      <h4 className="font-medium text-[#1BA7BC]">{resource.title}</h4>
+                      <p className="text-sm text-[#1BA7BC]">{resource.description}</p>
                     </div>
                   </div>
                 ))}
               </div>
-              <Button
-                className="bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white hover:from-violet-600 hover:to-fuchsia-600 transition-all duration-200 mt-4 w-full shadow-md"
-                onClick={() => router.push('/student/resources')}
-              >
+              <Button className="bg-[#1BA7BC] text-white hover:bg-[#37B8C6] transition-all duration-200 mt-4 w-full shadow-md">
                 See More Resources
               </Button>
             </CardContent>
@@ -289,49 +263,40 @@ export function StudentDashboardContent() {
         {/* Right Column */}
         <div className="space-y-6">
           {/* Calendar Card */}
-          <Card className="card bg-gradient-to-br from-blue-50 to-violet-50 shadow-lg">
+          <Card className="card bg-white shadow-md border border-[#E0F2F1]">
             <CardHeader>
-              <CardTitle className="text-blue-900">Calendar</CardTitle>
-              <CardDescription className="text-violet-700">View your schedule</CardDescription>
+              <CardTitle className="text-[#1BA7BC] font-bold">Calendar</CardTitle>
+              <CardDescription className="text-[#1BA7BC]">View your schedule</CardDescription>
             </CardHeader>
             <CardContent>
               <DayPicker
                 mode="single"
                 selected={selectedDate}
                 onSelect={setSelectedDate}
-                className="border-violet-200 rounded-lg"
+                className="border-[#E0F2F1] rounded-lg [&_.rdp-button:hover]:bg-[#1BA7BC]/10 [&_.rdp-button]:text-[#1BA7BC] [&_.rdp-button_selected]:bg-[#1BA7BC] [&_.rdp-button_selected]:text-white [&_.rdp-nav_button]:text-[#1BA7BC] [&_.rdp-nav_button:hover]:bg-[#1BA7BC]/10 [&_.rdp-caption]:text-[#1BA7BC] [&_.rdp-day_today]:text-[#37B8C6] [&_.rdp-day_today]:font-bold"
               />
             </CardContent>
           </Card>
 
           {/* Upcoming Sessions Card */}
-          <Card className="card bg-gradient-to-br from-violet-50 to-fuchsia-50 shadow-lg">
+          <Card className="card bg-white shadow-md border border-[#E0F2F1]">
             <CardHeader>
-              <CardTitle className="text-violet-900">Upcoming Sessions</CardTitle>
-              <CardDescription className="text-fuchsia-700">Your next learning sessions</CardDescription>
+              <CardTitle className="text-[#1BA7BC] font-bold">Upcoming Sessions</CardTitle>
+              <CardDescription className="text-[#1BA7BC]">Your next learning sessions</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 {sessionsForSelectedDate.map((session) => (
-                  <div key={session.id} className="p-4 bg-white/80 rounded-lg border border-fuchsia-200 shadow-sm">
-                    <div className="flex justify-between items-start">
-                      <div>
-                        <h4 className="font-medium text-violet-900">{session.subject}</h4>
-                        <p className="text-sm text-fuchsia-700">with {session.teacher}</p>
+                  <div key={session.id} className="p-4 bg-[#E0F7FA] rounded-lg border border-[#E0F2F1] shadow-sm flex items-center gap-3">
+                    <VideoIcon className="h-5 w-5 text-[#1BA7BC]" />
+                    <div className="flex-1">
+                      <h4 className="font-medium text-[#1BA7BC]">{session.subject}</h4>
+                      <p className="text-sm text-[#1BA7BC]">with {session.teacher}</p>
+                      <div className="flex justify-between mt-1">
+                        <Badge className="bg-[#FFF3E0] text-[#FF9800] border border-[#FFE0B2]">{session.duration}</Badge>
+                        <Button className="bg-[#FF9800] text-white hover:bg-[#FB8C00] transition-all duration-200 shadow-md px-3 py-1 h-auto text-xs">Join Now</Button>
                       </div>
-                      <Badge className="bg-fuchsia-100 text-fuchsia-700 border border-fuchsia-200">{
-                        session.duration}</Badge>
                     </div>
-                    <div className="mt-2 flex items-center text-sm text-violet-700">
-                      <ClockIcon className="h-4 w-4 mr-1" />
-                      {session.time}
-                    </div>
-                    <Button
-                      className="bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white hover:from-violet-600 hover:to-fuchsia-600 transition-all duration-200 mt-3 w-full shadow-md"
-                      onClick={() => joinSession(session.id)}
-                    >
-                      Join Session
-                    </Button>
                   </div>
                 ))}
               </div>
@@ -339,18 +304,21 @@ export function StudentDashboardContent() {
           </Card>
 
           {/* Announcements Card */}
-          <Card className="card bg-gradient-to-br from-fuchsia-50 to-pink-50 shadow-lg">
+          <Card className="card bg-white shadow-md border border-[#E0F2F1]">
             <CardHeader>
-              <CardTitle className="text-fuchsia-900">Announcements</CardTitle>
-              <CardDescription className="text-pink-700">Latest updates</CardDescription>
+              <CardTitle className="text-[#1BA7BC] font-bold">Announcements</CardTitle>
+              <CardDescription className="text-[#1BA7BC]">Latest updates</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 {announcements.map((announcement) => (
-                  <div key={announcement.id} className="p-4 bg-white/80 rounded-lg border border-pink-200 shadow-sm">
-                    <h4 className="font-medium text-fuchsia-900">{announcement.title}</h4>
-                    <p className="text-sm text-pink-700 mt-1">{announcement.description}</p>
-                    <p className="text-xs text-pink-600 mt-2">{announcement.date}</p>
+                  <div key={announcement.id} className="p-4 bg-[#E0F7FA] rounded-lg border border-[#E0F2F1] shadow-sm flex items-center gap-3">
+                    <BellIcon className="h-5 w-5 text-[#1BA7BC]" />
+                    <div className="flex-1">
+                      <h4 className="font-medium text-[#1BA7BC]">{announcement.title}</h4>
+                      <p className="text-sm text-[#1BA7BC] mt-1">{announcement.description}</p>
+                      <p className="text-xs text-[#1BA7BC]/80 mt-2">{announcement.date}</p>
+                    </div>
                   </div>
                 ))}
               </div>
