@@ -113,21 +113,27 @@ export default function StudentLayout({ children }: { children: React.ReactNode 
         </nav>
 
         {/* User Profile and Logout */}
-        <div className="p-4 border-t border-[#1BA7BC]/30">
-          <div className="flex items-center space-x-3">
-            <div className="relative">
-              <div className="absolute inset-0 bg-[#1BA7BC] rounded-full blur-sm"></div>
-              <div className="relative h-8 w-8 rounded-full bg-[#1BA7BC] flex items-center justify-center">
-                <User className="h-4 w-4 text-white" />
+        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-[#1BA7BC]/30">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center space-x-3">
+              <div className="relative">
+                <div className="absolute inset-0 bg-[#1BA7BC] rounded-full blur-sm"></div>
+                <div className="relative h-8 w-8 rounded-full bg-[#1BA7BC] flex items-center justify-center">
+                  <User className="h-4 w-4 text-white" />
+                </div>
+              </div>
+              <div>
+                <p className="text-sm font-medium text-white">Mehdi</p>
+                <p className="text-xs text-white/90">Student</p>
               </div>
             </div>
-            <div>
-              <p className="text-sm font-medium text-white">Mehdi</p>
-              <p className="text-xs text-white/90">Student</p>
-            </div>
           </div>
-          <Button className="mt-4 w-full bg-white text-[#1BA7BC] hover:bg-[#E0F7FA] flex items-center gap-2 font-bold" onClick={() => router.push('/logout')}>
-            Logout
+          <Button 
+            className="w-full bg-white text-[#1BA7BC] hover:bg-[#E0F7FA] flex items-center gap-2 font-bold py-2" 
+            onClick={() => router.push('/logout')}
+          >
+            <LogOut className="h-4 w-4" />
+            <span>Logout</span>
           </Button>
         </div>
       </aside>

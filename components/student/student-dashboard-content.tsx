@@ -376,7 +376,7 @@ export function StudentDashboardContent() {
           </Card>
 
 
-          {/* Upcoming Sessions Card */}
+          {/* Upcoming Sessions Card
           <Card className="card bg-white shadow-md border border-[#E0F2F1]">
             <CardHeader>
               <CardTitle className="text-[#0D47A1] font-bold">Upcoming Sessions</CardTitle>
@@ -399,7 +399,7 @@ export function StudentDashboardContent() {
                 ))}
               </div>
             </CardContent>
-          </Card>
+          </Card> */}
 
           {/* Announcements Card */}
           <Card className="card bg-white shadow-md border border-[#E0F2F1]">
