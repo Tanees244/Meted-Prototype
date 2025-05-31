@@ -18,7 +18,7 @@ import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { DayPicker } from "react-day-picker"
 import { format } from "date-fns"
-import "react-day-picker/dist/style.css"
+// import "react-day-picker/dist/style.css"
 
 // Mock data
 const announcements = [
@@ -51,7 +51,7 @@ const upcomingSessions = [
     duration: "45 minutes",
     date: new Date(),
   },
-  
+
   {
     id: 3,
     teacher: "Mrs. Brown",
@@ -145,21 +145,56 @@ export function StudentDashboardContent() {
   }
 
   return (
-    <div className="space-y-6 bg-[#F5FAFF] rounded-lg  min-h-screen w-full">
+    <div className="space-y-6 bg-[#F5FAFF] rounded-md  min-h-screen w-full">
       {/* Main content grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left Column */}
         <div className="lg:col-span-2 space-y-6">
           {/* Welcome Card */}
-          <Card className="bg-gradient-to-br from-[#C5D2FA] to-[#EDE8FE] border-none shadow-lg">
-            <div className="flex justify-between items-center h-full">
-              <div className="p-6">
-                <h2 className="text-2xl font-bold text-[#191970]">Welcome back, Mehdi</h2>
-                <p className="text-[#019583] mt-2">You've learned 70% of your goal this week!</p>
-                <p className="text-[#019583]">Keep it up and improve your progress.</p>
+          <Card className="card overflow-hidden rounded-md bg-gradient-to-br from-[#191970] via-[#191970] to-[#2c2cc0] shadow-xl">
+            <div className="relative">
+              {/* Decorative elements */}
+              <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
+              <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-blue-400/30 to-violet-400/30 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+              <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-fuchsia-400/30 to-violet-400/30 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+
+              <div className="relative flex justify-between items-center h-full p-8 rounded-md">
+                <div className="space-y-4">
+                  <div className="space-y-2">
+                    <h2 className="text-3xl font-bold text-white">Welcome back, Mehdi! 👋</h2>
+                    <p className="text-blue-100 text-lg">Ready to continue your learning journey?</p>
+                  </div>
+
+                  <div className="space-y-3">
+                    <div className="flex items-center space-x-2">
+                      <div className="w-full bg-white/20 rounded-full h-2.5">
+                        <div className="bg-white h-2.5 rounded-full" style={{ width: '70%' }}></div>
+                      </div>
+                      <span className="text-white font-medium">70%</span>
+                    </div>
+                    <p className="text-violet-100">You've completed 70% of your weekly goal!</p>
+                  </div>
+
+                  <div className="flex space-x-4">
+                    <Button className="bg-white text-blue-600 hover:bg-blue-50 transition-all duration-200">
+                      View Progress
+                    </Button>
+                    <Button className="bg-white/20 text-white hover:bg-white/30 transition-all duration-200">
+                      Set New Goals
+                    </Button>
+                  </div>
+                </div>
+
+                {/* User Avatar with decorative border */}
+                <div className="relative">
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-fuchsia-400 rounded-full blur-lg animate-pulse"></div>
+                  <img
+                    src="/Humaaans Space.svg"
+                    alt="User avatar"
+                    className="relative h-[200px] w-auto object-cover"
+                  />
+                </div>
               </div>
-              {/* User Avatar */}
-              <img src="/Humaaans Space.svg" alt="User avatar" className="h-[200px] w-auto object-cover" />
             </div>
           </Card>
 
@@ -255,73 +290,58 @@ export function StudentDashboardContent() {
         {/* Right Column */}
         <div className="lg:col-span-1 space-y-6">
           {/* Upcoming Sessions Card with Calendar */}
-          <Card className="bg-white border-[#C5D2FA] shadow-lg p-4">
-            <CardHeader className="p-0 pb-3 border-b border-[#C5D2FA]/50 mb-3">
-              <CardTitle className="text-[#191970] text-lg font-semibold">Upcoming Sessions</CardTitle>
+          <Card className="bg-gradient-to-br from-white/90 to-[#f0f8ff] backdrop-blur-md border border-[#191970]/10 shadow-lg rounded-xl">
+            <CardHeader className="px-6 pt-6 pb-2">
+              <CardTitle className="text-[#191970] text-xl font-bold">Upcoming Sessions</CardTitle>
+              <CardDescription className="text-[#019583] text-sm">
+                Select a date to view your sessions
+              </CardDescription>
             </CardHeader>
-            <CardContent className="p-0">
-              <div className="border border-[#C5D2FA] rounded-md p-2">
-                <DayPicker
-                  mode="single"
-                  selected={selectedDate}
-                  onSelect={setSelectedDate}
-                  className="!bg-white"
-                  modifiers={{
-                    session: upcomingSessions.map(session => session.date),
-                    today: new Date(),
-                    selected: selectedDate
-                  }}
-                  modifiersStyles={{
-                    session: { 
-                      fontWeight: 'bold', 
-                      border: '2px solid #ff7f00',
-                      backgroundColor: '#fff5e6',
-                      color: '#ff7f00',
-                      borderRadius: '50%'
-                    },
-                    today: {
-                      backgroundColor: '#191970',
-                      color: 'white',
-                      borderRadius: '50%'
-                    },
-                    selected: {
-                      backgroundColor: '#ff7f00',
-                      color: 'white',
-                      borderRadius: '50%'
-                    }
-                  }}
-                  styles={{
-                    caption: { color: '#191970', fontSize: '1rem', fontWeight: '600' },
-                    day: { 
-                      color: '#191970',
-                      margin: '0.1rem',
-                      transition: 'all 0.2s ease'
-                    },
-                    head_cell: { 
-                      color: '#019583',
-                      fontWeight: '600',
-                      textTransform: 'uppercase',
-                      fontSize: '0.75rem'
-                    },
-                    button: { 
-                      color: '#191970'
-                    },
-                    nav_button: { 
-                      color: '#191970'
-                    },
-                    nav_button_previous: { 
-                      color: '#191970'
-                    },
-                    nav_button_next: { 
-                      color: '#191970'
-                    },
-                    caption_label: {
-                      fontSize: '1rem',
-                      fontWeight: '600'
-                    }
-                  }}
-                />
-              </div>
+            <CardContent>
+              <DayPicker
+                mode="single"
+                selected={selectedDate}
+                onSelect={setSelectedDate}
+                modifiers={{
+                  session: upcomingSessions.map(session => session.date),
+                  today: new Date(),
+                  selected: selectedDate ? [selectedDate] : []
+                }}
+                modifiersStyles={{
+                  session: {
+                    fontWeight: 'bold',
+                    border: '2px solid #ff7f00',
+                    backgroundColor: '#fff5e6',
+                    color: '#ff7f00',
+                    borderRadius: '50%'
+                  },
+                  today: {
+                    backgroundColor: '#191970',
+                    color: 'white',
+                    borderRadius: '50%'
+                  },
+                  selected: {
+                    backgroundColor: '#ff7f00',
+                    color: 'white',
+                    borderRadius: '50%'
+                  }
+                }}
+                classNames={{
+                  caption: "relative flex justify-center items-center text-lg font-bold text-[#191970] mb-2",
+                  nav: "absolute inset-0 flex justify-between items-center px-2",
+                  nav_button: "w-8 h-8 rounded-full hover:bg-[#191970]/10",
+                  table: "w-full border-collapse",
+                  head_row: "flex justify-between border-b mb-2",
+                  head_cell: "text-[#ff7f00] font-semibold text-sm",
+                  row: "flex justify-between mb-2",
+                  cell: "w-10 h-10 flex items-center justify-center",
+                  day: "rounded-full w-10 h-10 flex items-center justify-center text-sm font-medium text-[#191970] hover:bg-[#191970]/10",
+                  day_selected: "bg-[#191970] text-white font-bold border border-[#191970] shadow-md",
+                  day_today: "border border-[#ff7f00] text-[#ff7f00] font-semibold",
+                  day_outside: "text-gray-300",
+                }}
+                
+              />
               {sessionsForSelectedDate.length > 0 ? (
                 <div className="mt-3 space-y-2">
                   <h3 className="text-[#191970] font-semibold text-sm">Sessions on {selectedDate && format(selectedDate, 'PPP')}</h3>
@@ -357,6 +377,7 @@ export function StudentDashboardContent() {
               )}
             </CardContent>
           </Card>
+
 
           {/* Announcements Card */}
           <Card className="bg-white/90 backdrop-blur-sm border-[#ff7f00]/20 shadow-lg">
