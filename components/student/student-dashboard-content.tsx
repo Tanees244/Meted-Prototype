@@ -155,7 +155,7 @@ export function StudentDashboardContent() {
             <div className="relative flex justify-between items-center h-full p-8">
               <div className="space-y-4">
                 <div className="space-y-2">
-                  <h2 className="text-3xl font-bold text-[#1BA7BC]">Welcome back, Mehdi!</h2>
+                  <h2 className="text-3xl font-bold text-[#0D47A1]" style={{ letterSpacing: "0.05em" }}>Welcome back, Mehdi!</h2>
                   <p className="text-[#1BA7BC] text-lg">You've completed <span className='font-bold'>70%</span> of your goal this week. Keep it up and pursue your progress!</p>
                 </div>
                 <div className="flex space-x-4">
@@ -177,32 +177,32 @@ export function StudentDashboardContent() {
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             <Card className="card bg-white shadow-md border border-[#E0F2F1]">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-bold text-[#1BA7BC]">Upcoming Sessions</CardTitle>
-                <VideoIcon className="h-5 w-5 text-[#1BA7BC]" />
+                <CardTitle className="text-sm font-bold text-[#0D47A1]">Upcoming Sessions</CardTitle>
+                <VideoIcon className="h-5 w-5 text-[#0D47A1]" />
               </CardHeader>
               <CardContent>
                 <div className="text-3xl font-bold text-[#1BA7BC] mb-1">{upcomingSessions.length}</div>
-                <p className="text-xs text-[#1BA7BC] font-medium">Scheduled for you</p>
+                <p className="text-xs text-[#0D47A1] font-medium">Scheduled for you</p>
               </CardContent>
             </Card>
             <Card className="card bg-white shadow-md border border-[#E0F2F1]">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-bold text-[#1BA7BC]">Pending Assignments</CardTitle>
-                <FileTextIcon className="h-5 w-5 text-[#1BA7BC]" />
+                <CardTitle className="text-sm font-bold text-[#0D47A1]">Pending Assignments</CardTitle>
+                <FileTextIcon className="h-5 w-5 text-[#0D47A1]" />
               </CardHeader>
               <CardContent>
                 <div className="text-3xl font-bold text-[#1BA7BC] mb-1">{assignments.filter((a) => a.status === "pending").length}</div>
-                <p className="text-xs text-[#1BA7BC] font-medium">Due soon</p>
+                <p className="text-xs text-[#0D47A1] font-medium">Due soon</p>
               </CardContent>
             </Card>
             <Card className="card bg-white shadow-md border border-[#E0F2F1]">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-bold text-[#1BA7BC]">Completed Assignments</CardTitle>
-                <CheckCircleIcon className="h-5 w-5 text-[#1BA7BC]" />
+                <CardTitle className="text-sm font-bold text-[#0D47A1]">Completed Assignments</CardTitle>
+                <CheckCircleIcon className="h-5 w-5 text-[#0D47A1]" />
               </CardHeader>
               <CardContent>
                 <div className="text-3xl font-bold text-[#1BA7BC] mb-1">{assignments.filter((a) => a.status === "completed").length}</div>
-                <p className="text-xs text-[#1BA7BC] font-medium">Submitted successfully</p>
+                <p className="text-xs text-[#0D47A1] font-medium">Submitted successfully</p>
               </CardContent>
             </Card>
           </div>
@@ -210,20 +210,20 @@ export function StudentDashboardContent() {
           {/* Pending Assignments Card */}
           <Card className="card bg-white shadow-md border border-[#E0F2F1]">
             <CardHeader>
-              <CardTitle className="text-[#1BA7BC] font-bold">Pending Assignments</CardTitle>
-              <CardDescription className="text-[#1BA7BC]">Assignments due soon</CardDescription>
+              <CardTitle className="text-[#0D47A1] font-bold">Pending Assignments</CardTitle>
+              <CardDescription className="text-[#0D47A1]">Assignments due soon</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 {assignments.filter(a => a.status === "pending").map((assignment) => (
                   <Alert key={assignment.id} className="bg-[#E0F7FA] border-[#E0F2F1] shadow-sm flex items-center gap-3">
-                    <FileTextIcon className="h-5 w-5 text-[#1BA7BC]" />
+                    <FileTextIcon className="h-5 w-5 text-[#0D47A1]" />
                     <div className="flex-1">
-                      <AlertTitle className="text-[#1BA7BC] font-bold">{assignment.title}</AlertTitle>
-                      <AlertDescription className="mt-1 text-[#1BA7BC]">
+                      <AlertTitle className="text-[#0D47A1] font-bold">{assignment.title}</AlertTitle>
+                      <AlertDescription className="mt-1 text-[#0D47A1]">
                         {assignment.description}
                         <div className="flex justify-between mt-1">
-                          <span className="text-xs text-[#1BA7BC] font-semibold">Due: {assignment.dueDate}</span>
+                          <span className="text-xs text-[#0D47A1] font-semibold">Due: {assignment.dueDate}</span>
                           <span className="text-xs text-[#FF9800] font-semibold">Due soon</span>
                         </div>
                       </AlertDescription>
@@ -237,18 +237,18 @@ export function StudentDashboardContent() {
           {/* Featured Resources Card */}
           <Card className="card bg-white shadow-md border border-[#E0F2F1]">
             <CardHeader>
-              <CardTitle className="text-[#1BA7BC] font-bold">Featured Resources</CardTitle>
-              <CardDescription className="text-[#1BA7BC]">Helpful materials for your studies</CardDescription>
+              <CardTitle className="text-[#0D47A1] font-bold">Featured Resources</CardTitle>
+              <CardDescription className="text-[#0D47A1]">Helpful materials for your studies</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 {featuredResources.map(resource => (
                   <div key={resource.id} className="flex items-center space-x-3 p-3 bg-[#E0F7FA] rounded-lg border border-[#E0F2F1] shadow-sm">
-                    {resource.type === 'document' && <FileTextIcon className="h-5 w-5 text-[#1BA7BC]" />}
-                    {resource.type === 'video' && <VideoIcon className="h-5 w-5 text-[#1BA7BC]" />}
+                    {resource.type === 'document' && <FileTextIcon className="h-5 w-5 text-[#0D47A1]" />}
+                    {resource.type === 'video' && <VideoIcon className="h-5 w-5 text-[#0D47A1]" />}
                     <div className="flex-1">
-                      <h4 className="font-medium text-[#1BA7BC]">{resource.title}</h4>
-                      <p className="text-sm text-[#1BA7BC]">{resource.description}</p>
+                      <h4 className="font-medium text-[#0D47A1]">{resource.title}</h4>
+                      <p className="text-sm text-[#0D47A1]">{resource.description}</p>
                     </div>
                   </div>
                 ))}
@@ -265,15 +265,15 @@ export function StudentDashboardContent() {
           {/* Calendar Card */}
           <Card className="card bg-white shadow-md border border-[#E0F2F1]">
             <CardHeader>
-              <CardTitle className="text-[#1BA7BC] font-bold">Calendar</CardTitle>
-              <CardDescription className="text-[#1BA7BC]">View your schedule</CardDescription>
+              <CardTitle className="text-[#0D47A1] font-bold">Calendar</CardTitle>
+              <CardDescription className="text-[#0D47A1]">View your schedule</CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="p-4">
               <DayPicker
                 mode="single"
                 selected={selectedDate}
                 onSelect={setSelectedDate}
-                className="border-[#E0F2F1] rounded-lg [&_.rdp-button:hover]:bg-[#1BA7BC]/10 [&_.rdp-button]:text-[#1BA7BC] [&_.rdp-button_selected]:bg-[#1BA7BC] [&_.rdp-button_selected]:text-white [&_.rdp-nav_button]:text-[#1BA7BC] [&_.rdp-nav_button:hover]:bg-[#1BA7BC]/10 [&_.rdp-caption]:text-[#1BA7BC] [&_.rdp-day_today]:text-[#37B8C6] [&_.rdp-day_today]:font-bold"
+                className="border-[#E0F2F1] rounded-lg [&_.rdp-button:hover]:bg-[#1BA7BC]/10 [&_.rdp-button]:text-[#0D47A1] [&_.rdp-button_selected]:bg-[#0D47A1] [&_.rdp-button_selected]:text-white [&_.rdp-nav_button]:text-[#0D47A1] [&_.rdp-nav_button:hover]:bg-[#0D47A1]/10 [&_.rdp-caption]:text-[#0D47A1] [&_.rdp-day_today]:text-[#37B8C6] [&_.rdp-day_today]:font-bold"
               />
             </CardContent>
           </Card>
@@ -281,17 +281,17 @@ export function StudentDashboardContent() {
           {/* Upcoming Sessions Card */}
           <Card className="card bg-white shadow-md border border-[#E0F2F1]">
             <CardHeader>
-              <CardTitle className="text-[#1BA7BC] font-bold">Upcoming Sessions</CardTitle>
-              <CardDescription className="text-[#1BA7BC]">Your next learning sessions</CardDescription>
+              <CardTitle className="text-[#0D47A1] font-bold">Upcoming Sessions</CardTitle>
+              <CardDescription className="text-[#0D47A1]">Your next learning sessions</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 {sessionsForSelectedDate.map((session) => (
                   <div key={session.id} className="p-4 bg-[#E0F7FA] rounded-lg border border-[#E0F2F1] shadow-sm flex items-center gap-3">
-                    <VideoIcon className="h-5 w-5 text-[#1BA7BC]" />
+                    <VideoIcon className="h-5 w-5 text-[#0D47A1]" />
                     <div className="flex-1">
-                      <h4 className="font-medium text-[#1BA7BC]">{session.subject}</h4>
-                      <p className="text-sm text-[#1BA7BC]">with {session.teacher}</p>
+                      <h4 className="font-medium text-[#0D47A1]">{session.subject}</h4>
+                      <p className="text-sm text-[#0D47A1]">with {session.teacher}</p>
                       <div className="flex justify-between mt-1">
                         <Badge className="bg-[#FFF3E0] text-[#FF9800] border border-[#FFE0B2]">{session.duration}</Badge>
                         <Button className="bg-[#FF9800] text-white hover:bg-[#FB8C00] transition-all duration-200 shadow-md px-3 py-1 h-auto text-xs">Join Now</Button>
@@ -306,18 +306,18 @@ export function StudentDashboardContent() {
           {/* Announcements Card */}
           <Card className="card bg-white shadow-md border border-[#E0F2F1]">
             <CardHeader>
-              <CardTitle className="text-[#1BA7BC] font-bold">Announcements</CardTitle>
-              <CardDescription className="text-[#1BA7BC]">Latest updates</CardDescription>
+              <CardTitle className="text-[#0D47A1] font-bold">Announcements</CardTitle>
+              <CardDescription className="text-[#0D47A1]">Latest updates</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 {announcements.map((announcement) => (
                   <div key={announcement.id} className="p-4 bg-[#E0F7FA] rounded-lg border border-[#E0F2F1] shadow-sm flex items-center gap-3">
-                    <BellIcon className="h-5 w-5 text-[#1BA7BC]" />
+                    <BellIcon className="h-5 w-5 text-[#0D47A1]" />
                     <div className="flex-1">
-                      <h4 className="font-medium text-[#1BA7BC]">{announcement.title}</h4>
-                      <p className="text-sm text-[#1BA7BC] mt-1">{announcement.description}</p>
-                      <p className="text-xs text-[#1BA7BC]/80 mt-2">{announcement.date}</p>
+                      <h4 className="font-medium text-[#0D47A1]">{announcement.title}</h4>
+                      <p className="text-sm text-[#0D47A1] mt-1">{announcement.description}</p>
+                      <p className="text-xs text-[#0D47A1]/80 mt-2">{announcement.date}</p>
                     </div>
                   </div>
                 ))}
