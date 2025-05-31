@@ -145,7 +145,7 @@ export function StudentDashboardContent() {
   }
 
   return (
-    <div className="space-y-6 bg-[#EDE8FE] rounded-lg  min-h-screen w-full">
+    <div className="space-y-6 bg-[#F5FAFF] rounded-lg  min-h-screen w-full">
       {/* Main content grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left Column */}
