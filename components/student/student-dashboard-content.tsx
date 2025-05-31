@@ -151,24 +151,49 @@ export function StudentDashboardContent() {
         {/* Left Column */}
         <div className="lg:col-span-2 space-y-6">
           {/* Welcome Card */}
-          <Card className="card overflow-hidden bg-white shadow-lg border border-[#E0F2F1]">
-            <div className="relative flex justify-between items-center h-full p-8">
-              <div className="space-y-4">
-                <div className="space-y-2">
-                  <h2 className="text-3xl font-bold text-[#0D47A1]" >Welcome back, Mehdi!</h2>
-                  <p className="text-[#1BA7BC] text-lg">You've completed <span className='font-bold'>70%</span> of your goal this week. Keep it up and pursue your progress!</p>
+          <Card className="card overflow-hidden rounded-md bg-gradient-to-br from-[#1BA7BC] via-[#1BA7BC] to-[#28cee8] shadow-xl">
+            <div className="relative">
+              {/* Decorative elements */}
+              <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
+              <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-blue-400/30 to-violet-400/30 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+              <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-fuchsia-400/30 to-violet-400/30 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+
+              <div className="relative flex justify-between items-center h-full p-8 rounded-md">
+                <div className="space-y-4">
+                  <div className="space-y-2">
+                    <h2 className="text-3xl font-bold text-white">Welcome back, Mehdi! 👋</h2>
+                    <p className="text-blue-100 text-lg">Ready to continue your learning journey?</p>
+                  </div>
+
+                  <div className="space-y-3">
+                    <div className="flex items-center space-x-2">
+                      <div className="w-full bg-white/20 rounded-full h-2.5">
+                        <div className="bg-white h-2.5 rounded-full" style={{ width: '70%' }}></div>
+                      </div>
+                      <span className="text-white font-medium">70%</span>
+                    </div>
+                    <p className="text-violet-100">You've completed 70% of your weekly goal!</p>
+                  </div>
+
+                  <div className="flex space-x-4">
+                    <Button className="bg-white text-blue-600 hover:bg-blue-50 transition-all duration-200">
+                      View Progress
+                    </Button>
+                    <Button className="bg-white/20 text-white hover:bg-white/30 transition-all duration-200">
+                      Set New Goals
+                    </Button>
+                  </div>
                 </div>
-                <div className="flex space-x-4">
-                  <Button className="bg-[#1BA7BC] text-white hover:bg-[#37B8C6] transition-all duration-200">
-                    View Progress
-                  </Button>
-                  <Button className="bg-[#E0F7FA] text-[#1BA7BC] hover:bg-[#BDECF6] transition-all duration-200">
-                    Set New Goals
-                  </Button>
+
+                {/* User Avatar with decorative border */}
+                <div className="relative">
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#E0F7FA] to-[#1BA7BC] rounded-full blur-lg animate-pulse"></div>
+                  <img
+                    src="/Humaaans Space.svg"
+                    alt="User avatar"
+                    className="relative h-[200px] w-auto object-cover"
+                  />
                 </div>
-              </div>
-              <div className="relative mt-6">
-                <img src="/Humaaans Space.svg" alt="User avatar" className="relative h-[180px] w-auto object-cover" />
               </div>
             </div>
           </Card>
