@@ -145,7 +145,7 @@ export function StudentDashboardContent() {
   }
 
   return (
-    <div className="space-y-6 bg-[#F5FAFF] rounded-md  min-h-screen w-full">
+    <div className="space-y-6 bg-[#F2F7FC] rounded-md  min-h-screen w-full">
       {/* Main content grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left Column */}
@@ -288,9 +288,9 @@ export function StudentDashboardContent() {
         </div>
 
         {/* Right Column */}
-        <div className="lg:col-span-1 space-y-6">
+        <div className="lg:col-span-1 space-y-6 pr-6">
           {/* Upcoming Sessions Card with Calendar */}
-          <Card className="bg-gradient-to-br from-white/90 to-[#f0f8ff] backdrop-blur-md border border-[#191970]/10 shadow-lg rounded-xl">
+          <Card className="bg-[#FEFEFF] backdrop-blur-md border border-[#FEE5CE] shadow-lg rounded-xl">
             <CardHeader className="px-6 pt-6 pb-2">
               <CardTitle className="text-[#191970] text-xl font-bold">Upcoming Sessions</CardTitle>
               <CardDescription className="text-[#019583] text-sm">
@@ -393,8 +393,8 @@ export function StudentDashboardContent() {
                       <div>
                         <h4 className="font-medium text-[#191970]">{announcement.title}</h4>
                         <p className="text-sm text-[#191970]/80 mt-1">{announcement.description}</p>
-                      </div>
                       <span className="text-xs text-[#019583]">{announcement.date}</span>
+                      </div>
                     </div>
                   </div>
                 ))}

@@ -66,7 +66,7 @@ export default function StudentLayout({ children }: { children: React.ReactNode 
   const pathname = usePathname()
 
   return (
-    <div className="min-h-screen bg-[#F5FAFF]">
+    <div className="min-h-screen bg-[#F2F7FC]">
       {/* Mobile Sidebar Toggle */}
       <button
         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
