@@ -155,7 +155,7 @@ export function StudentDashboardContent() {
             <div className="relative flex justify-between items-center h-full p-8">
               <div className="space-y-4">
                 <div className="space-y-2">
-                  <h2 className="text-3xl font-bold text-[#0D47A1]" style={{ letterSpacing: "0.05em" }}>Welcome back, Mehdi!</h2>
+                  <h2 className="text-3xl font-bold text-[#0D47A1]" >Welcome back, Mehdi!</h2>
                   <p className="text-[#1BA7BC] text-lg">You've completed <span className='font-bold'>70%</span> of your goal this week. Keep it up and pursue your progress!</p>
                 </div>
                 <div className="flex space-x-4">
@@ -263,20 +263,93 @@ export function StudentDashboardContent() {
         {/* Right Column */}
         <div className="space-y-6">
           {/* Calendar Card */}
-          <Card className="card bg-white shadow-md border border-[#E0F2F1]">
-            <CardHeader>
-              <CardTitle className="text-[#0D47A1] font-bold">Calendar</CardTitle>
-              <CardDescription className="text-[#0D47A1]">View your schedule</CardDescription>
+          <Card className="bg-gradient-to-br from-white/90 to-[#f0f8ff] backdrop-blur-md border border-[#191970]/10 shadow-lg rounded-xl">
+            <CardHeader className="px-6 pt-6 pb-2">
+              <CardTitle className="text-[#0D47A1] text-xl font-bold">Upcoming Sessions</CardTitle>
+              <CardDescription className="text-[#1BA7BC] text-sm">
+                Select a date to view your sessions
+              </CardDescription>
             </CardHeader>
-            <CardContent className="p-4">
+            <CardContent>
               <DayPicker
                 mode="single"
                 selected={selectedDate}
                 onSelect={setSelectedDate}
-                className="border-[#E0F2F1] rounded-lg [&_.rdp-button:hover]:bg-[#1BA7BC]/10 [&_.rdp-button]:text-[#0D47A1] [&_.rdp-button_selected]:bg-[#0D47A1] [&_.rdp-button_selected]:text-white [&_.rdp-nav_button]:text-[#0D47A1] [&_.rdp-nav_button:hover]:bg-[#0D47A1]/10 [&_.rdp-caption]:text-[#0D47A1] [&_.rdp-day_today]:text-[#37B8C6] [&_.rdp-day_today]:font-bold"
+                modifiers={{
+                  session: upcomingSessions.map(session => session.date),
+                  today: new Date(),
+                  selected: selectedDate ? [selectedDate] : []
+                }}
+                modifiersStyles={{
+                  session: {
+                    fontWeight: 'bold',
+                    border: '2px solid #ff7f00',
+                    backgroundColor: '#fff5e6',
+                    color: '#ff7f00',
+                    borderRadius: '50%'
+                  },
+                  today: {
+                    backgroundColor: '#191970',
+                    color: 'white',
+                    borderRadius: '50%'
+                  },
+                  selected: {
+                    backgroundColor: '#ff7f00',
+                    color: 'white',
+                    borderRadius: '50%'
+                  }
+                }}
+                classNames={{
+                  caption: "relative flex justify-center items-center text-lg font-bold text-[#0D47A1] mb-2",
+                  nav: "absolute inset-0 flex justify-between items-center px-2",
+                  nav_button: "w-8 h-8 rounded-full hover:bg-[#191970]/10 text-[#191970]",
+                  table: "w-full border-collapse",
+                  head_row: "flex justify-between border-b mb-2",
+                  head_cell: "text-[#ff7f00] font-semibold text-sm",
+                  row: "flex justify-between mb-2",
+                  cell: "w-10 h-10 flex items-center justify-center",
+                  day: "rounded-full w-10 h-10 flex items-center justify-center text-sm font-medium text-[#191970] hover:bg-[#191970]/10",
+                  day_selected: "bg-[#ff7f00] text-white font-bold border border-[#ff7f00] shadow-md",
+                  day_today: "border border-[#ff7f00] text-[#ff7f00] font-semibold",
+                  day_outside: "text-gray-300",
+                }}
               />
+              {sessionsForSelectedDate.length > 0 ? (
+                <div className="mt-3 space-y-2">
+                  <h3 className="text-[#0D47A1] font-semibold text-sm">Sessions on {selectedDate && format(selectedDate, 'PPP')}</h3>
+                  {sessionsForSelectedDate.map(session => (
+                    <div key={session.id} className="text-sm text-[#191970]/80 p-3 rounded-lg bg-[#E0F7FA] border border-[#ff7f00]/20">
+                      <div className="flex items-center justify-between">
+                        <span className="font-medium">{session.subject}</span>
+                        <span className="text-[#ff7f00]">{session.time}</span>
+                      </div>
+                      <div className="flex items-center mt-1">
+                        <User className="h-3 w-3 mr-1 text-[#0D47A1]" />
+                        <span className="text-[#0D47A1]">with {session.teacher}</span>
+                      </div>
+                      <div className="flex items-center justify-between mt-2">
+                        <div className="flex items-center text-xs text-[#ff7f00]">
+                          <ClockIcon className="h-3 w-3 mr-1" />
+                          <span>{session.duration}</span>
+                        </div>
+                        <Button
+                          onClick={() => router.push('/student/live-sessions')}
+                          className="bg-[#ff7f00] hover:bg-[#ff7f00]/90 text-white text-xs px-3 py-1 h-7"
+                        >
+                          Join Now
+                        </Button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="mt-3 text-center py-3 text-[#191970]/60">
+                  <p>No sessions scheduled for this day</p>
+                </div>
+              )}
             </CardContent>
           </Card>
+
 
           {/* Upcoming Sessions Card */}
           <Card className="card bg-white shadow-md border border-[#E0F2F1]">

@@ -139,7 +139,7 @@ export default function StudentLayout({ children }: { children: React.ReactNode 
           isSidebarOpen ? "lg:ml-72" : "lg:ml-72"
         )}
       >
-        <div className="p-6">{children}</div>
+        <div className="px-0 py-[16px]">{children}</div>
       </main>
     </div>
   )
