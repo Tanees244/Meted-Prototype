@@ -261,7 +261,7 @@ export function StudentDashboardContent() {
         </div>
 
         {/* Right Column */}
-        <div className="space-y-6">
+        <div className="lg:col-span-1 space-y-6 pr-6">
           {/* Calendar Card */}
           <Card className="bg-gradient-to-br from-white/90 to-[#f0f8ff] backdrop-blur-md border border-[#191970]/10 shadow-lg rounded-xl">
             <CardHeader className="px-6 pt-6 pb-2">
