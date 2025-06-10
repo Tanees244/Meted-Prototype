@@ -48,7 +48,7 @@ export function StudentDashboardContent() {
     }
   }, [selectedDate]);
 
-  const joinSession = (sessionId) => {
+  const joinSession = (sessionId : any) => {
     console.log(`Joining session ${sessionId}`);
   };
 
