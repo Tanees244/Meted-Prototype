@@ -194,31 +194,51 @@ export function StudentDashboardContent() {
               <CardTitle className="text-[#191970] font-bold text-xl">Upcoming Sessions</CardTitle>
               <CardDescription className="text-[#4B5563]">Select a date to view your sessions</CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <DayPicker
-                mode="single"
-                selected={selectedDate}
-                onSelect={setSelectedDate}
-                modifiers={{ session: upcomingSessions.map(session => session.date), today: new Date() }}
-                modifiersStyles={{
-                  session: { fontWeight: "bold", border: "2px solid #ff7f00", backgroundColor: "#fff5e6", color: "#ff7f00", borderRadius: "50%" },
-                  today: { backgroundColor: "#191970", color: "white", borderRadius: "50%" },
-                }}
-                classNames={{
-                  months: "flex justify-center bg-[#F0F4F8] p-4 rounded-lg shadow-md border border-[#EDEDED]",
-                  caption: "relative flex justify-center items-center text-lg font-bold text-[#191970] mb-4",
-                  nav: "absolute inset-0 flex justify-between items-center px-4",
-                  nav_button: "w-8 h-8 rounded-full hover:bg-[#F0F4F8] text-[#191970]",
-                  table: "w-full border-collapse",
-                  head_row: "flex justify-between mb-2",
-                  head_cell: "text-[#4B5563] font-semibold text-sm",
-                  row: "flex justify-between mb-2",
-                  cell: "w-10 h-10 flex items-center justify-center",
-                  day: "rounded-full w-10 h-10 flex items-center justify-center text-sm font-medium text-[#191970] hover:bg-[#F0F4F8]",
-                  day_selected: "bg-[#ff7f00] text-white font-bold border border-[#ff7f00]",
-                  day_today: "border border-[#191970] text-[#191970] font-semibold",
-                }}
-              />
+            <CardContent className="space-y-6">
+              {/* Custom Calendar Header */}
+              <div className="flex items-center justify-between mb-2 px-2">
+                {/* <div className="flex items-center gap-2">
+                  <CalendarIcon className="h-6 w-6 text-[#191970]" />
+                  <span className="text-lg font-bold text-[#191970]">
+                    {selectedDate ? format(selectedDate, "MMMM yyyy") : format(new Date(), "MMMM yyyy")}
+                  </span>
+                </div> */}
+                {/* Legend */}
+                <div className="flex items-center gap-3">
+                  <span className="flex items-center text-xs text-[#191970]">
+                    <span className="inline-block w-3 h-3 rounded-full border-2 border-[#ff7f00] bg-[#fff5e6] mr-1"></span> Session
+                  </span>
+                  <span className="flex items-center text-xs text-[#191970]">
+                    <span className="inline-block w-3 h-3 rounded-full bg-[#191970] mr-1"></span> Today
+                  </span>
+                </div>
+              </div>
+              <div className="rounded-2xl ">
+                <DayPicker
+                  mode="single"
+                  selected={selectedDate}
+                  onSelect={setSelectedDate}
+                  modifiers={{ session: upcomingSessions.map(session => session.date), today: new Date() }}
+                  modifiersStyles={{
+                    session: { fontWeight: "bold", border: "2px solid #ff7f00", backgroundColor: "#fff5e6", color: "#ff7f00", borderRadius: "50%" },
+                    today: { backgroundColor: "#191970", color: "white", borderRadius: "50%" },
+                  }}
+                  classNames={{
+                    months: "flex justify-center bg-white p-4 rounded-xl bg-gradient-to-br from-[#f0f4f8] to-[#e0e7ef] shadow border border-[#EDEDED]",
+                    caption: "relative flex justify-center items-center text-lg font-bold text-[#191970] mb-4",
+                    nav: "absolute inset-0 flex justify-between items-center px-4",
+                    nav_button: "w-8 h-8 rounded-full hover:bg-[#ff7f00]/10 active:bg-[#ff7f00]/20 text-[#191970] border border-[#E0E7EF] shadow-sm transition-all duration-150",
+                    table: "w-full border-collapse",
+                    head_row: "flex justify-between mb-2",
+                    head_cell: "text-[#4B5563] font-semibold text-sm",
+                    row: "flex justify-between mb-2",
+                    cell: "w-10 h-10 flex items-center justify-center",
+                    day: "rounded-full w-10 h-10 flex items-center justify-center text-sm font-medium text-[#191970] hover:bg-[#F0F4F8] transition-all duration-150",
+                    day_selected: "bg-[#ff7f00] text-white font-bold border border-[#ff7f00] shadow-md",
+                    day_today: "border border-[#191970] text-[#191970] font-semibold",
+                  }}
+                />
+              </div>
               {sessionsForSelectedDate.length > 0 ? (
                 <div className="mt-4 space-y-3 border-t pt-4 border-[#E0E7EF]">
                   <h3 className="text-[#191970] font-semibold text-base">Sessions on {selectedDate && format(selectedDate, "PPP")}</h3>

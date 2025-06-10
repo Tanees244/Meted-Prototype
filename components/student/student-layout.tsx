@@ -18,6 +18,7 @@ import {
   X,
   User,
 } from "lucide-react";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 const sidebarLinks = [
   { title: "Dashboard", href: "/student/dashboard", icon: LayoutDashboard },
@@ -91,7 +92,7 @@ export default function StudentLayout({ children }: { children: React.ReactNode 
         </nav>
 
         {/* Bottom Links at the bottom of the sidebar */}
-        <div className="absolute bottom-0 left-0 right-0 p-4">
+        <div className="absolute bottom-0 left-0 right-0 p-4 border-b border-[#ededed]">
           <nav className="space-y-2">
             {BottomLinks.map((link) => (
               <Button
@@ -110,6 +111,20 @@ export default function StudentLayout({ children }: { children: React.ReactNode 
               </Button>
             ))}
           </nav>
+
+          <div className="mt-4 flex items-center justify-between text-sm text-[#191970]">
+            <div>Night Mode</div>
+            <div>
+              {/* Theme Toggle Button */}
+              <div className="ml-2">
+                {/* Import and use your theme toggle component */}
+                {/* If you have a ThemeToggle component, use it here: */}
+                {/* <ThemeToggle /> */}
+                {/* Otherwise, add a simple switch as a placeholder: */}
+                <ThemeToggle />
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* User Profile and Logout */}
