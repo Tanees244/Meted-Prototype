@@ -28,6 +28,27 @@ const assignments = [
   { id: 3, title: "Science Lab Report", subject: "Science", dueDate: "July 10, 2024", status: "completed" },
 ];
 
+const featuredResources = [
+  {
+    id: 1,
+    title: "Algebra II Study Guide",
+    type: "document",
+    description: "Comprehensive guide covering key concepts in Algebra II.",
+  },
+  {
+    id: 2,
+    title: "Introduction to Biology Lecture",
+    type: "video",
+    description: "Video lecture introducing fundamental biology topics.",
+  },
+  {
+    id: 3,
+    title: "Essay Writing Tips",
+    type: "document",
+    description: "Tips and tricks for writing effective essays.",
+  },
+]
+
 export function StudentDashboardContent() {
   const router = useRouter();
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -55,7 +76,7 @@ export function StudentDashboardContent() {
   return (
     <div className="min-h-screen bg-[#F9FAFB] space-y-6">
       {/* Welcome Card */}
-      <Card className="bg-white border border-[#E0E7EF] shadow-lg rounded-xl relative overflow-hidden">
+      <Card className="bg-white border border-[#ededed] shadow-md rounded-xl relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-5"></div>
         <CardContent className="flex items-center justify-between">
           <div className="space-y-4 max-w-lg p-6 ">
@@ -71,7 +92,7 @@ export function StudentDashboardContent() {
             </div>
             <p className="text-sm text-[#4B5563]">Progress towards weekly goal</p>
             <div className="flex space-x-4 mt-6">
-              <Button className="bg-[#191970] text-white hover:bg-[#131352] transition-all duration-200">View Progress</Button>
+              <Button className="bg-[#191970] text-white hover:bg-[#131352] transition-all duration-200 cursor-pointer">View Progress</Button>
               <Button className="bg-white text-[#191970] border border-[#191970] hover:bg-[#F0F4F8] transition-all duration-200">Set New Goals</Button>
             </div>
           </div>
@@ -85,7 +106,7 @@ export function StudentDashboardContent() {
         <div className="lg:col-span-2 space-y-6">
           {/* KPI Cards */}
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            <Card className=" bg-white shadow-md border border-[#E0F2F1]">
+            <Card className=" bg-white shadow-md border border-[#EDEDED]">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-bold text-[#191970]">Upcoming Sessions</CardTitle>
                 <VideoIcon className="h-7 w-7 text-[#191970]" />
@@ -95,7 +116,7 @@ export function StudentDashboardContent() {
                 <p className="text-xs text-[#191970] font-medium">Scheduled for you</p>
               </CardContent>
             </Card>
-            <Card className=" bg-white shadow-md border border-[#E0F2F1]">
+            <Card className=" bg-white shadow-md border border-[#EDEDED]">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-bold text-[#191970]">Pending Assignments</CardTitle>
                 <FileTextIcon className="h-7 w-7 text-[#191970]" />
@@ -105,7 +126,7 @@ export function StudentDashboardContent() {
                 <p className="text-xs text-[#191970] font-medium">Due soon</p>
               </CardContent>
             </Card>
-            <Card className=" bg-white shadow-md border border-[#E0F2F1]">
+            <Card className=" bg-white shadow-md border border-[#EDEDED]">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-bold text-[#191970]">Completed Assignments</CardTitle>
                 <CheckCircleIcon className="h-7 w-7 text-[#191970]" />
@@ -125,7 +146,7 @@ export function StudentDashboardContent() {
             </CardHeader>
             <CardContent className="space-y-4">
               {assignments.filter(a => a.status === "pending").map((assignment) => (
-                <div key={assignment.id} className="flex items-start space-x-3 p-4 bg-white rounded-lg shadow-sm border border-[#E0F2F1]">
+                <div key={assignment.id} className="flex items-start space-x-3 p-4 bg-[#F0F4F8] rounded-lg shadow-sm border border-[#EDEDED ]">
                   <FileTextIcon className="h-7 w-7 text-[#ff7f00] mt-1" />
                   <div className="flex-1">
                     <h4 className="font-medium text-[#191970]">{assignment.title}</h4>
@@ -137,6 +158,30 @@ export function StudentDashboardContent() {
                   </div>
                 </div>
               ))}
+            </CardContent>
+          </Card>
+
+          <Card className="bg-white shadow-md border border-[#E0F2F1]">
+            <CardHeader>
+              <CardTitle className="text-[20px] text-[#191970] font-bold">Featured Resources</CardTitle>
+              <CardDescription className="text-[#4B5563]">Helpful materials for your studies</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {featuredResources.map(resource => (
+                  <div key={resource.id} className="flex items-center space-x-3 p-3 bg-[#F0F4F8] rounded-lg border border-[#EDEDED] shadow-sm">
+                    {resource.type === 'document' && <FileTextIcon className="h-5 w-5 text-[#FF7F00]" />}
+                    {resource.type === 'video' && <VideoIcon className="h-5 w-5 text-[#FF7F00]" />}
+                    <div className="flex-1">
+                      <h4 className="font-medium text-[#191970]">{resource.title}</h4>
+                      <p className="text-sm text-[#4B5563]">{resource.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <Button className="bg-[#191970] text-white hover:bg-white hover:text-[#191970] hover:border hover:border-[#191970] transition-all duration-200 mt-4 w-full shadow-md">
+                See More Resources
+              </Button>
             </CardContent>
           </Card>
         </div>
@@ -160,7 +205,7 @@ export function StudentDashboardContent() {
                   today: { backgroundColor: "#191970", color: "white", borderRadius: "50%" },
                 }}
                 classNames={{
-                  months: "flex justify-center",
+                  months: "flex justify-center bg-[#F0F4F8] p-4 rounded-lg shadow-md border border-[#EDEDED]",
                   caption: "relative flex justify-center items-center text-lg font-bold text-[#191970] mb-4",
                   nav: "absolute inset-0 flex justify-between items-center px-4",
                   nav_button: "w-8 h-8 rounded-full hover:bg-[#F0F4F8] text-[#191970]",

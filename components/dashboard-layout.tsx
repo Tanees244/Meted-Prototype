@@ -98,7 +98,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
     <div className="flex min-h-screen bg-gray-100 dark:bg-gray-900">
       {/* Desktop Sidebar */}
       <div className="hidden md:flex md:w-64 md:flex-col">
-        <div className="flex flex-col flex-grow pt-5 overflow-y-auto border-r border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950">
+        <div className="flex flex-col flex-grow pt-5 overflow-y-auto border-r border-[#EDEDED] dark:border-gray-800 bg-white dark:bg-gray-950">
           <div className="flex items-center justify-center h-14 px-4">
             <h1 className="text-xl font-bold text-gray-900 dark:text-gray-100">MetEd LMS</h1>
           </div>
