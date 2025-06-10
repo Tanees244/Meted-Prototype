@@ -92,16 +92,16 @@ export function StudentDashboardContent() {
                 <CardDescription className="text-sm text-[#4B5563]">Upcoming Sessions</CardDescription>
               </CardHeader>
             </Card>
-            <Card className="bg-[#ff7f00] text-white border border-[#ff7f00]/50 text-center shadow-md">
+            <Card className="bg-white text-white border text-center shadow-md">
               <CardHeader className="pb-2">
-                <FileTextIcon className="h-6 w-6 text-white mx-auto mb-2" />
-                <CardTitle className="text-xl font-bold">{assignments.filter(a => a.status === "pending").length}</CardTitle>
-                <CardDescription className="text-sm text-white/90">Pending Assignments</CardDescription>
+                <FileTextIcon className="h-6 w-6 text-[#1BA7BC] mx-auto mb-2" />
+                <CardTitle className="text-xl  text-[#191970] font-bold">{assignments.filter(a => a.status === "pending").length}</CardTitle>
+                <CardDescription className="text-md text-[#4B5563]">Pending Assignments</CardDescription>
               </CardHeader>
             </Card>
             <Card className="bg-white border border-[#E0F2F1] text-center shadow-md">
               <CardHeader className="pb-2">
-                <CheckCircleIcon className="h-6 w-6 text-[#0D47A1] mx-auto mb-2" />
+                <CheckCircleIcon className="h-6 w-6 text-[#1BA7BC] mx-auto mb-2" />
                 <CardTitle className="text-xl font-bold text-[#191970]">{assignments.filter(a => a.status === "completed").length}</CardTitle>
                 <CardDescription className="text-sm text-[#4B5563]">Completed Assignments</CardDescription>
               </CardHeader>
