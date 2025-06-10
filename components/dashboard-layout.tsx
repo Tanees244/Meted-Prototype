@@ -71,6 +71,19 @@ const navItems: NavItem[] = [
   },
 ]
 
+const navBottom: NavItem[] = [
+  {
+    title: "Notifications",
+    href: "/#",
+    icon: <BarChart3Icon className="h-5 w-5" />,
+  },
+  {
+    title: "Profile",
+    href: "/progress-reports",
+    icon: <BarChart3Icon className="h-5 w-5" />,
+  },
+]
+
 // Export as a named export
 export function DashboardLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
@@ -109,16 +122,25 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
                 )
               })}
             </nav>
-            <div className="mt-auto pb-4">
-              <Button
-                variant="ghost"
-                className="w-full justify-start text-gray-600 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-100"
-                onClick={handleLogout}
-              >
-                <LogOutIcon className="h-5 w-5 mr-3" />
-                Logout
-              </Button>
-            </div>
+            <nav className="flex-1 space-y-1">
+              {navBottom.map((item) => {
+                const isActive = pathname === item.href
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`flex items-center px-4 py-2 text-sm font-medium rounded-md ${
+                      isActive
+                        ? "bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-gray-100"
+                        : "text-gray-600 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-100"
+                    }`}
+                  >
+                    {item.icon}
+                    <span className="ml-3">{item.title}</span>
+                  </Link>
+                )
+              })}
+            </nav>
           </div>
         </div>
       </div>

@@ -10,9 +10,10 @@ import {
   BookOpen,
   Calendar,
   Video,
+  LogOut,
   FileText,
   BarChart,
-  LogOut,
+  Bell,
   Menu,
   X,
   User,
@@ -20,14 +21,20 @@ import {
 
 const sidebarLinks = [
   { title: "Dashboard", href: "/student/dashboard", icon: LayoutDashboard },
-  { title: "Courses", href: "/student/courses", icon: BookOpen },
+  // { title: "Courses", href: "/student/courses", icon: BookOpen },
   { title: "Schedule", href: "/student/schedule", icon: Calendar },
   { title: "Live Sessions", href: "/student/live-sessions", icon: Video },
   { title: "Assignments", href: "/student/assignments", icon: FileText },
   { title: "Progress", href: "/student/progress", icon: BarChart },
 ];
 
-export default function StudentLayout({ children } : { children: React.ReactNode }) {
+const BottomLinks = [
+  { title: "Profile", href: "/student/profile", icon: User },
+  { title: "Notifications", href: "/#", icon: Bell },
+  { title: "Logout", href: "/logout", icon: LogOut },
+];
+
+export default function StudentLayout({ children }: { children: React.ReactNode }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter()
@@ -50,14 +57,20 @@ export default function StudentLayout({ children } : { children: React.ReactNode
         )}
       >
         {/* Logo and Title */}
-        <div className="p-6">
-          <div className="flex items-center space-x-2">
-            <h1 className="text-2xl font-bold text-[#191970]">MetEd</h1>
+        <div className="flex flex-row p-6 gap-2">
+          <div>
+            <img
+              src="/logo.png"
+              alt="MetEd Logo"
+              className="h-14 w-14 rounded-full mb-2"
+            />
           </div>
-          <p className="text-sm text-[#191970] mt-1">Student Portal</p>
+          <div className="items-center">
+            <h1 className="text-2xl font-bold text-[#191970]">MetEd</h1>
+            <p className="text-sm text-[#191970] mt-1">Student Portal</p>
+          </div>
         </div>
 
-        {/* Navigation */}
         <nav className="p-4 space-y-2">
           {sidebarLinks.map((link) => (
             <Button
@@ -66,8 +79,8 @@ export default function StudentLayout({ children } : { children: React.ReactNode
               className={cn(
                 "w-full justify-start transition-all duration-200 rounded-xl flex items-center gap-2 text-black text-base font-medium",
                 pathname === link.href
-                  ? "bg-white text-[#191970] font-bold shadow-lg ring-2 ring-[#191970]/20 border border-white"
-                  : "hover:bg-white/10 hover:text-white hover:shadow-md hover:ring-2 hover:ring-white/20 border border-transparent"
+                  ? "bg-[#bdbdf3]/20 text-[#191970] font-bold shadow-lg"
+                  : "hover:bg-[#191970] hover:text-white hover:shadow-md"
               )}
               onClick={() => router.push(link.href)}
             >
@@ -77,8 +90,30 @@ export default function StudentLayout({ children } : { children: React.ReactNode
           ))}
         </nav>
 
-        {/* User Profile and Logout */}
+        {/* Bottom Links at the bottom of the sidebar */}
         <div className="absolute bottom-0 left-0 right-0 p-4">
+          <nav className="space-y-2">
+            {BottomLinks.map((link) => (
+              <Button
+                key={link.href}
+                variant="ghost"
+                className={cn(
+                  "w-full justify-start transition-all duration-200 rounded-xl flex items-center gap-2 text-black text-base font-medium",
+                  pathname === link.href
+                    ? "bg-[#bdbdf3]/20 text-[#191970] font-bold shadow-lg"
+                    : "hover:bg-[#191970] hover:text-white hover:shadow-md"
+                  )}
+                onClick={() => router.push(link.href)}
+              >
+                <link.icon className="mr-2 h-5 w-5" />
+                {link.title}
+              </Button>
+            ))}
+          </nav>
+        </div>
+
+        {/* User Profile and Logout */}
+        {/* <div className="absolute bottom-0 left-0 right-0 p-4">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center space-x-3">
               <div className="relative">
@@ -100,7 +135,7 @@ export default function StudentLayout({ children } : { children: React.ReactNode
             <LogOut className="h-4 w-4" />
             <span>Logout</span>
           </Button>
-        </div>
+        </div> */}
       </aside>
 
       {/* Main Content */}

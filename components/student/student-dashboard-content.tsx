@@ -85,26 +85,35 @@ export function StudentDashboardContent() {
         <div className="lg:col-span-2 space-y-6">
           {/* KPI Cards */}
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            <Card className="bg-white border border-[#E0F2F1] text-center shadow-md">
-              <CardHeader className="pb-2">
-                <VideoIcon className="h-6 w-6 text-[#1BA7BC] mx-auto mb-2" />
-                <CardTitle className="text-xl font-bold text-[#191970]">{upcomingSessions.length}</CardTitle>
-                <CardDescription className="text-sm text-[#4B5563]">Upcoming Sessions</CardDescription>
+            <Card className=" bg-white shadow-md border border-[#E0F2F1]">
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-bold text-[#191970]">Upcoming Sessions</CardTitle>
+                <VideoIcon className="h-7 w-7 text-[#191970]" />
               </CardHeader>
+              <CardContent>
+                <div className="text-3xl font-bold text-[#ff7f00] mb-1">{upcomingSessions.length}</div>
+                <p className="text-xs text-[#191970] font-medium">Scheduled for you</p>
+              </CardContent>
             </Card>
-            <Card className="bg-white text-white border text-center shadow-md">
-              <CardHeader className="pb-2">
-                <FileTextIcon className="h-6 w-6 text-[#1BA7BC] mx-auto mb-2" />
-                <CardTitle className="text-xl  text-[#191970] font-bold">{assignments.filter(a => a.status === "pending").length}</CardTitle>
-                <CardDescription className="text-md text-[#4B5563]">Pending Assignments</CardDescription>
+            <Card className=" bg-white shadow-md border border-[#E0F2F1]">
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-bold text-[#191970]">Pending Assignments</CardTitle>
+                <FileTextIcon className="h-7 w-7 text-[#191970]" />
               </CardHeader>
+              <CardContent>
+                <div className="text-3xl font-bold text-[#ff7f00] mb-1">{assignments.filter((a) => a.status === "pending").length}</div>
+                <p className="text-xs text-[#191970] font-medium">Due soon</p>
+              </CardContent>
             </Card>
-            <Card className="bg-white border border-[#E0F2F1] text-center shadow-md">
-              <CardHeader className="pb-2">
-                <CheckCircleIcon className="h-6 w-6 text-[#1BA7BC] mx-auto mb-2" />
-                <CardTitle className="text-xl font-bold text-[#191970]">{assignments.filter(a => a.status === "completed").length}</CardTitle>
-                <CardDescription className="text-sm text-[#4B5563]">Completed Assignments</CardDescription>
+            <Card className=" bg-white shadow-md border border-[#E0F2F1]">
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-bold text-[#191970]">Completed Assignments</CardTitle>
+                <CheckCircleIcon className="h-7 w-7 text-[#191970]" />
               </CardHeader>
+              <CardContent>
+                <div className="text-3xl font-bold text-[#ff7f00] mb-1">{assignments.filter((a) => a.status === "completed").length}</div>
+                <p className="text-xs text-[#191970] font-medium">Submitted successfully</p>
+              </CardContent>
             </Card>
           </div>
 
@@ -117,7 +126,7 @@ export function StudentDashboardContent() {
             <CardContent className="space-y-4">
               {assignments.filter(a => a.status === "pending").map((assignment) => (
                 <div key={assignment.id} className="flex items-start space-x-3 p-4 bg-white rounded-lg shadow-sm border border-[#E0F2F1]">
-                  <FileTextIcon className="h-5 w-5 text-[#1BA7BC] mt-1" />
+                  <FileTextIcon className="h-7 w-7 text-[#ff7f00] mt-1" />
                   <div className="flex-1">
                     <h4 className="font-medium text-[#191970]">{assignment.title}</h4>
                     <p className="text-sm text-[#4B5563] mt-1">{assignment.description}</p>
@@ -211,7 +220,7 @@ export function StudentDashboardContent() {
               {announcements.map((announcement) => (
                 <div key={announcement.id} className="p-3 bg-[#F0F4F8] rounded-lg shadow-sm border border-[#E0E7EF]">
                   <div className="flex items-start space-x-3">
-                    <BellIcon className="h-5 w-5 text-[#1BA7BC] mt-1" />
+                    <BellIcon className="h-7 w-7 text-[#ff7f00] mt-1" />
                     <div className="flex-1 flex justify-between">
                       <div>
                         <h4 className="font-medium text-[#191970]">{announcement.title}</h4>

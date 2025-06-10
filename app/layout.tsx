@@ -4,7 +4,7 @@ import { DynaPuff, Poetsen_One, Sniglet, Lato, Nunito, Poppins, Inter } from "ne
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 
-const inter = Inter({ subsets: ["latin"], weight: "400" })
+const inter = Poppins({ subsets: ["latin"], weight: "400" })
 
 export const metadata: Metadata = {
   title: "MetEd LMS - Teacher Portal",
